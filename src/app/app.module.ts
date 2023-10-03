@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HeaderComponent } from './components/header/header.component';
+import { StudentProjectComponent } from './components/student-project/student-project.component';
 
 registerLocaleData(en);
 
@@ -25,7 +26,8 @@ registerLocaleData(en);
     LoginComponent,
     HomeComponent,
     SidenavComponent,
-    HeaderComponent
+    HeaderComponent,
+    StudentProjectComponent
   ],
   imports: [
     BrowserModule,

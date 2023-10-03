@@ -1,0 +1,30 @@
+<nz-layout>
+    <nz-content>
+        <div class="inner-content">
+            <br />
+            <div class="content-text">
+                <h2 class="text-project">Nombre del proyecto:</h2>
+                <p class="text-project">Administración de proyectos de grado del area de ingeniería de sistemas</p>
+            </div>
+            <br />
+            <nz-table #editRowTable nzBordered [nzData]="listOfData">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th nzWidth="30%">Nombre</th>
+                        <th>Numero de identidad</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of editRowTable.data" class="editable-row">
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.numberId }}</td>
+                        <td><a>{{ data.state}}</a></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </nz-content>
+</nz-layout>
