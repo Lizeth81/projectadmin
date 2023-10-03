@@ -1,0 +1,42 @@
+<nz-layout>
+    <nz-header>
+        <nz-breadcrumb>
+            <h3 class="from-tittle">USUARIOS REGISTRADOS</h3>
+        </nz-breadcrumb>
+    </nz-header>
+    <nz-content>
+        <div class="inner-content">
+            <!--<br />
+            <button nz-button (click)="addRow()" nzType="primary">Agregar Estudiante</button>
+            <br />-->
+            <br />
+            <nz-table #editRowTable nzBordered [nzData]="listOfData">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th nzWidth="30%">Nombre</th>
+                        <th>Numero de identidad</th>
+                        <th>Nombre del proyecto de grado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of editRowTable.data" class="editable-row">
+                        <td>{{ data.id }}</td>
+                        <td>
+                            <div class="editable-cell" [hidden]="editId === data.id" (click)="startEdit(data.id)">
+                                {{ data.name }}
+                            </div>
+                            <input [hidden]="editId !== data.id" type="text" nz-input [(ngModel)]="data.name" (blur)="stopEdit()" />
+                        </td>
+                        <td>{{ data.numberId }}</td>
+                        <td>{{ data.nameProject }}</td>
+                        <td>
+                            <a nz-popconfirm nzPopconfirmTitle="¿Estas seguro de eliminar el usuario?" (nzOnConfirm)="deleteRow(data.id)">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </nz-content>
+</nz-layout>
