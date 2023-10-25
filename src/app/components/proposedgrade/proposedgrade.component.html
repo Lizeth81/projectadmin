@@ -1,0 +1,52 @@
+<nz-layout>
+    <nz-header>
+        <nz-breadcrumb>
+            <app-header></app-header>
+        </nz-breadcrumb>
+    </nz-header>
+    <nz-content>
+        <div class="inner-content">
+            <br />
+            <button nz-button nzType="primary">Agregar Propuesta de grado</button>
+            <br />
+            <br />
+            <nz-table #editRowTable nzBordered>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th nzWidth="30%">Nombre del proyecto de grado</th>
+                        <th>Subir archivo</th>
+                        <th>Estado</th>
+                        <th>Comentarios</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{date | date : 'short'}}</td>
+                        <td></td>
+                        <td>
+                            <nz-upload [nzFileList]="fileList">
+                                <button nz-button>
+                              <span nz-icon nzType="upload"></span>
+                            </button>
+                            </nz-upload>
+                        </td>
+                        <td>
+                            <a>Aprovado</a>
+                        </td>
+                        <td>
+                            <button nz-button [nzType]="'primary'" (click)="showModal()">
+                                <span nz-icon nzType="snippets" nzTheme="outline" class="button-commit"></span>
+                            </button>
+                            <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnOk)="handleOk()">
+                                <ng-container *nzModalContent>
+                                    <p>Content one</p>
+                                </ng-container>
+                            </nz-modal>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </nz-content>
+</nz-layout>

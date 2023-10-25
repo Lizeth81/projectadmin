@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { StudentProjectComponent } from './components/student-project/student-project.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { ProposedgradeComponent } from './components/proposedgrade/proposedgrade.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'Login' },
@@ -15,8 +16,8 @@ const routes: Routes = [
         { path: 'StudenProject', component:StudentProjectComponent},        
         { path: 'Users', component:UserComponent},   
         { path: 'CreateUser', component:CreateUserComponent},     
-        /*{ path: 'propuestaGrado', component:ProposedGradeComponent },
-        { path: 'PreliminaryProject', component:PreliminaryProjectComponent},
+        { path: 'propuestaGrado', component:ProposedgradeComponent },
+        /*{ path: 'PreliminaryProject', component:PreliminaryProjectComponent},
         { path: 'ProjectFinal', component:ProjectFinalComponent},
         { path: 'Configuration', component:ConfigurationComponent}*/
     ]

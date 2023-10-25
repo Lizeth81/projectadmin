@@ -19,6 +19,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { StudentProjectComponent } from './components/student-project/student-project.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { ProposedgradeComponent } from './components/proposedgrade/proposedgrade.component';
 
 registerLocaleData(en);
 
@@ -31,7 +32,8 @@ registerLocaleData(en);
     HeaderComponent,
     StudentProjectComponent,
     UserComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    ProposedgradeComponent
   ],
   imports: [
     BrowserModule,

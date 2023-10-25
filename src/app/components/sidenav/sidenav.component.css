@@ -1,13 +1,15 @@
 .logo {
-    height: 90px;
-    /*background: rgba(255, 255, 255, 0.2);*/
-    margin: 12px;
+    height: 70px;
+    margin: 16px;
 }
 
 .img-logo {
     width: 100%;
     height: auto;
 }
+
+
+/**Icono del modal*/
 
 .icons {
     color: rgb(241, 85, 46);
