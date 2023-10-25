@@ -1,4 +1,5 @@
-<nz-sider nzCollapsible class="form-menu">
+<nz-sider nzCollapsible nzWidth="200px">
+    <!--LOGO-->
     <div class="logo">
         <img class="img-logo" src="../../../assets/logo-udes-sm.png">
     </div>
@@ -6,7 +7,7 @@
     <ul nz-menu nzTheme="dark" nzMode="inline">
         <li nz-menu-item nzSelected routerLink="StudenProject" routerLinkActive="active">
             <span nz-icon nzType="user"></span>
-            <span>Estudiantes del proyecto</span>
+            <span>Estudiante</span>
         </li>
         <li nz-submenu nzTitle="Trabajo de grado" nzIcon="file">
             <ul>
@@ -30,6 +31,7 @@
             <span nz-icon nzType="close"></span>
             <span>Cerrar sesión</span>
         </li>
+        <!--Modal de cerrar sesión-->
         <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
             <ng-template #modalTitle class="modal-title">
                 <span nz-icon class="icons" nzType="exclamation-circle" nzTheme="outline"></span> ¡Cierre de sesión automatica!

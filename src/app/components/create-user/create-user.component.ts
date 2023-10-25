@@ -25,6 +25,8 @@ export class CreateUserComponent {
     confirm: FormControl<string>;
     NameProject: FormControl<string>;
   }>;
+  
+  selectedValue = null;
 
   resetForm(e: MouseEvent): void {
     e.preventDefault();
