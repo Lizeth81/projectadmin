@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 interface ItemData {
   id: string;
@@ -13,21 +13,50 @@ interface ItemData {
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent {
+export class UserComponent implements OnInit{
+
+  constructor(private modal: NzModalService) {}
+
+  editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
+  listOfData: ItemData[] = [];
   i = 0;
   editId: string | null = null;
-  listOfData: ItemData[] = [];
+  selectedValue = null;
 
   startEdit(id: string): void {
-    this.editId = id;
+    //this.editId = id;
+    this.editCache[id].edit = true;
   }
-
   stopEdit(): void {
     this.editId = null;
   }
-  constructor( private router: Router) {}
+  cancelEdit(id: string): void {
+    const index = this.listOfData.findIndex(item => item.id === id);
+    this.editCache[id] = {
+      data: { ...this.listOfData[index] },
+      edit: false
+    };
+  }
+  saveEdit(id: string): void {
+    const index = this.listOfData.findIndex(item => item.id === id);
+    Object.assign(this.listOfData[index], this.editCache[id].data);
+    this.editCache[id].edit = false;
+      this.modal.success({
+        nzTitle: 'Datos editados correctamente',
+        nzContent: 'Se guardo con exito los datos registrados.'
+      });
+  }
+
+  updateEditCache(): void {
+    this.listOfData.forEach(item => {
+      this.editCache[item.id] = {
+        edit: false,
+        data: { ...item }
+      };
+    });
+  }
+
   addRow(): void {
-    /*this.router.navigate(['/CreateUser']);*/
     this.listOfData = [
       {
         id: `${this.i}`,
@@ -43,6 +72,7 @@ export class UserComponent {
      }      
     ];
     this.i++;
+    this.updateEditCache();
   }
 
   deleteRow(id: string): void {
@@ -50,7 +80,6 @@ export class UserComponent {
   }
 
   ngOnInit(): void {
-    this.addRow();
     this.addRow();
   }
 }

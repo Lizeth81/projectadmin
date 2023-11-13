@@ -1,3 +1,14 @@
+nz-header {
+    background: #ffffff;
+    height: 80px;
+}
+
+.from-tittle {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    text-align: center;
+}
+
 .content-text {
     margin-left: 20px;
 }

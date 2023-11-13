@@ -1,15 +1,12 @@
 .from-tittle {
     font-family: 'Times New Roman', serif;
     font-weight: bold;
-    padding: 20px;
+    text-align: center;
 }
 
 nz-header {
     background: #fff;
-}
-
-nz-breadcrumb {
-    margin: 16px 0;
+    height: 80px;
 }
 
 .inner-content {
@@ -28,4 +25,9 @@ nz-breadcrumb {
     border: 1px solid #d9d9d9;
     border-radius: 4px;
     padding: 4px 11px;
+}
+
+.icons {
+    font-size: 20px;
+    margin-right: 20px;
 }
