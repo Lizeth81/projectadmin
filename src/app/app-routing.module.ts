@@ -6,6 +6,9 @@ import { StudentProjectComponent } from './components/student-project/student-pr
 import { UserComponent } from './components/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { ProposedgradeComponent } from './components/proposedgrade/proposedgrade.component';
+import { ConfigComponent } from './components/config/config.component';
+import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
+import { SecurityComponent } from './components/security/security.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'Login' },
@@ -17,9 +20,16 @@ const routes: Routes = [
         { path: 'Users', component:UserComponent},   
         { path: 'CreateUser', component:CreateUserComponent},     
         { path: 'propuestaGrado', component:ProposedgradeComponent },
+        { path: 'Configuration', component:ConfigComponent,
+          children: [
+            { path: '', pathMatch: 'full', redirectTo: 'PersonalInformation'},
+            { path: 'PersonalInformation', component:PersonalInformationComponent},
+            { path: 'Security', component:SecurityComponent}
+          ]
+        },
         /*{ path: 'PreliminaryProject', component:PreliminaryProjectComponent},
         { path: 'ProjectFinal', component:ProjectFinalComponent},
-        { path: 'Configuration', component:ConfigurationComponent}*/
+        */
     ]
     }
 ];
