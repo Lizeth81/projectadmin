@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators, FormsModule} from '@angular/forms';
 import {  NzModalService } from 'ng-zorro-antd/modal';
 import { Router } from '@angular/router';
 
@@ -28,7 +28,7 @@ export class LoginComponent {
         this.modal.success({
           nzContent: '¡Bienvenido al sistema de administración de proyecto de grado!'
           });
-        this.router.navigate(['/Home']);
+        this.router.navigate(['/Seira']);
         console.log('submit', this.validateForm.value);
       }else {
         this.modal.error({
@@ -44,6 +44,9 @@ export class LoginComponent {
         
       });
     }
+  }
+  login(){
+    console.log(this.validateForm.value)
   }
 
   

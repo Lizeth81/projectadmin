@@ -45,15 +45,6 @@
                     </nz-select>
                 </nz-form-control>
             </nz-form-item>
-            <!--Nombre del proyecto-->
-            <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Nombre del proyecto</nz-form-label>
-                <nz-form-control [nzSpan]="30" nzHasFeedback nzErrorTip="¡Por favor ingresar el nombre del proyecto de grado!">
-                    <nz-textarea-count [nzMaxCharacterCount]="2000">
-                        <textarea formControlName="NameProject" nz-input rows="2"></textarea>
-                    </nz-textarea-count>
-                </nz-form-control>
-            </nz-form-item>
             <nz-form-item>
                 <nz-form-control [nzOffset]="7" [nzSpan]="30">
                     <button nz-button nzType="primary" [disabled]="!validateForm.valid">Registrar Usuario</button>

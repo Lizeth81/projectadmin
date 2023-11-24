@@ -1,16 +1,32 @@
 <nz-layout>
-    <!--MENU-->
-    <nz-sider nzCollapsible class="form-menu">
-        <app-sidenav></app-sidenav>
-    </nz-sider>
-    <!--CONTENIDO-->
-    <nz-layout>
-        <nz-content>
-            <div class="inner-content">
-                <router-outlet></router-outlet>
-            </div>
-        </nz-content>
-        <!--PIE DE PAGINA-->
-        <nz-footer>Todos los derechos reservados ©2023 Universidad de santander campus Cúcuta</nz-footer>
-    </nz-layout>
+    <nz-header>
+        <h3 class="from-tittle">CALENDARIO DE ENTREGA</h3>
+        <hr>
+    </nz-header>
+    <nz-content>
+        <div class="inner-content">
+            <br />
+            <br />
+            <nz-table #editRowTable nzBordered [nzData]="listOfData">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Mes</th>
+                        <th nzWidth="30%">Entrega estudiante</th>
+                        <th>Sesion de comite</th>
+                        <th>Entrega de propuesta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of editRowTable.data" class="editable-row">
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.mes }}</td>
+                        <td>{{ data.entregaEstudiante }}</td>
+                        <td><a>{{ data.sesionComite}}</a></td>
+                        <td><a>{{ data.entregaPropuesta}}</a></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </nz-content>
 </nz-layout>

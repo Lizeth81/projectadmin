@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HomeComponent } from './components/home/home.component';
 import { StudentProjectComponent } from './components/student-project/student-project.component';
 import { UserComponent } from './components/user/user.component';
@@ -13,9 +14,10 @@ import { SecurityComponent } from './components/security/security.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'Login' },
     { path: 'Login', component:LoginComponent },
-    { path: 'Home', component:HomeComponent,
+    { path: 'Seira', component:SidenavComponent,
     children: [
-        { path: '', pathMatch: 'full', redirectTo: 'StudenProject'},
+        { path: '', pathMatch: 'full', redirectTo: 'Home'},
+        { path: 'Home', component:HomeComponent},
         { path: 'StudenProject', component:StudentProjectComponent},        
         { path: 'Users', component:UserComponent},   
         { path: 'CreateUser', component:CreateUserComponent},     

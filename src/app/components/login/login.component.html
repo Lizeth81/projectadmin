@@ -3,13 +3,14 @@
         <img class="logo-img" src="../assets/logo-udes.png">
     </div>
     <div class="form-contenido">
-        <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+        <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()" method="post">
             <div>
                 <H3 class="title-login">INICIAR SESIÓN</H3>
             </div>
             <nz-form-item>
                 <nz-form-control nzErrorTip="¡Por favor ingrese su usuario!">
                     <nz-input-group nzPrefixIcon="user">
+                        <!--<input type="text" ([ngModel])="user" name="user" required="required" nz-input formControlName="userName" placeholder="Usuario"/> -->
                         <input type="text" nz-input formControlName="userName" placeholder="Usuario" />
                     </nz-input-group>
                 </nz-form-control>
@@ -17,11 +18,12 @@
             <nz-form-item>
                 <nz-form-control nzErrorTip="¡Por favor ingrese su contraseña!">
                     <nz-input-group nzPrefixIcon="lock">
+                        <!--<input type="password" ([ngModel])="pass" name="password" requested="required" nz-input formControlName="password" placeholder="Contraseña" />-->
                         <input type="password" nz-input formControlName="password" placeholder="Contraseña" />
                     </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
-            <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Aceptar</button>
+            <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="login()">Aceptar</button>
             <a>Restablecer contraseña</a>
         </form>
     </div>
