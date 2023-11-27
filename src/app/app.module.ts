@@ -23,6 +23,9 @@ import { ProposedgradeComponent } from './components/proposedgrade/proposedgrade
 import { ConfigComponent } from './components/config/config.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { SecurityComponent } from './components/security/security.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { DraftComponent } from './components/draft/draft.component';
+import { ProjectfinalComponent } from './components/projectfinal/projectfinal.component';
 
 registerLocaleData(en);
 
@@ -39,7 +42,10 @@ registerLocaleData(en);
     ProposedgradeComponent,
     ConfigComponent,
     PersonalInformationComponent,
-    SecurityComponent
+    SecurityComponent,
+    CreateProjectComponent,
+    DraftComponent,
+    ProjectfinalComponent
   ],
   imports: [
     BrowserModule,

@@ -6,22 +6,28 @@ import { HomeComponent } from './components/home/home.component';
 import { StudentProjectComponent } from './components/student-project/student-project.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { ProposedgradeComponent } from './components/proposedgrade/proposedgrade.component';
+import { DraftComponent } from './components/draft/draft.component';
+import { ProjectfinalComponent } from './components/projectfinal/projectfinal.component';
 import { ConfigComponent } from './components/config/config.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { SecurityComponent } from './components/security/security.component';
 
+
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'Login' },
     { path: 'Login', component:LoginComponent },
-    { path: 'Seira', component:SidenavComponent,
+    { path: 'Home', component:HomeComponent,
     children: [
-        { path: '', pathMatch: 'full', redirectTo: 'Home'},
-        { path: 'Home', component:HomeComponent},
+        { path: '', pathMatch: 'full', redirectTo: 'StudenProject'},
         { path: 'StudenProject', component:StudentProjectComponent},        
         { path: 'Users', component:UserComponent},   
+        { path: 'CreateProject', component:CreateProjectComponent},
         { path: 'CreateUser', component:CreateUserComponent},     
         { path: 'propuestaGrado', component:ProposedgradeComponent },
+        { path: 'anteproyecto', component:DraftComponent },
+        { path: 'projectfinal', component:ProjectfinalComponent},
         { path: 'Configuration', component:ConfigComponent,
           children: [
             { path: '', pathMatch: 'full', redirectTo: 'PersonalInformation'},
@@ -36,8 +42,13 @@ const routes: Routes = [
     }
 ];
 
+
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
+
 export class AppRoutingModule { }
+
