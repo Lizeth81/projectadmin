@@ -8,6 +8,8 @@ import { UserComponent } from './components/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { ProposedgradeComponent } from './components/proposedgrade/proposedgrade.component';
+import { DraftComponent } from './components/draft/draft.component';
+import { ProjectfinalComponent } from './components/projectfinal/projectfinal.component';
 import { ConfigComponent } from './components/config/config.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { SecurityComponent } from './components/security/security.component';
@@ -25,6 +27,8 @@ const routes: Routes = [
         { path: 'CreateProject', component:CreateProjectComponent},
         { path: 'CreateUser', component:CreateUserComponent},     
         { path: 'propuestaGrado', component:ProposedgradeComponent },
+        { path: 'anteproyecto', component:DraftComponent },
+        { path: 'projectfinal', component:ProjectfinalComponent},
         { path: 'Configuration', component:ConfigComponent,
           children: [
             { path: '', pathMatch: 'full', redirectTo: 'PersonalInformation'},

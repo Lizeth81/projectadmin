@@ -30,21 +30,21 @@ export class HomeComponent {
     data = [
       {
         proceso: 'Propuesta de trabajo de grado',
-        entrega: 'John Brown',
-        comite: 32,
-        resultado: 'New York No. 1 Lake Park'
+        entrega: '26 de noviembre',
+        comite: '06 de diciembre',
+        resultado: '24 de diciembre'
       },
       {
         proceso: 'Anteproyecto',
-        entrega: 'Jim Green',
-        comite: 42,
-        resultado: 'London No. 1 Lake Park'
+        entrega: '26 de noviembre',
+        comite: '06 de diciembre',
+        resultado: '24 de diciembre'
       },
       {
         proceso: 'Proyecto Final',
-        entrega: 'Joe Black',
-        comite: 32,
-        resultado: 'Sidney No. 1 Lake Park'
+        entrega: '26 de noviembre',
+        comite: '06 de diciembre',
+        resultado: '24 de diciembre'
       }
     ];
   
