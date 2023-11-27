@@ -28,7 +28,7 @@ const routes: Routes = [
         { path: 'CreateUser', component:CreateUserComponent},     
         { path: 'propuestaGrado', component:ProposedgradeComponent },
         { path: 'anteproyecto', component:DraftComponent },
-        { path: 'projectfinal', component:ProjectfinalComponent},
+        { path: 'projectfinal', component:ProjectfinalComponent}
         { path: 'Configuration', component:ConfigComponent,
           children: [
             { path: '', pathMatch: 'full', redirectTo: 'PersonalInformation'},
