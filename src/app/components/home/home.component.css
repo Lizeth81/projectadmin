@@ -9,16 +9,34 @@
 
 /*}*/
 
-nz-content {
-    margin: 0 16px;
+.from-tittle {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    text-align: center;
 }
 
 .inner-content {
-    padding: 24px;
+    padding: 10px;
     background: #fff;
-    min-height: 360px;
+    min-height: 460px;
 }
 
-nz-footer {
+
+nz-header {
+    background: #fff;
+    height: 80px;
+}
+
+tr{
     text-align: center;
 }
+
+z-tabled{
+   text-align: center;
+}
+
+
+
+
+
+

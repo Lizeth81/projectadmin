@@ -1,0 +1,46 @@
+.from-tittle {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+[nz-form] {
+      background: #fff;
+    
+} 
+
+nz-header {
+    background: #fff;
+    height: 80px;
+}
+
+.inner-content {
+    /* padding: 10px; */
+    background: #fff;
+    min-height: 460px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    
+}
+
+
+.phone-select {
+    width: 70px;
+}
+
+.registroproyecto1{
+    width: 360px;
+
+}
+
+.registroproyecto{
+    width: 430px;
+
+}
+
+.register-are {
+    margin-bottom: 8px;
+}
+    
+  
