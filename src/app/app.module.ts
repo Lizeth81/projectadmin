@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoNgZorroAntdModule } from './ng-zorro-antd.module';
-
+//componentes
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -23,7 +23,8 @@ import { ProposedgradeComponent } from './components/proposedgrade/proposedgrade
 import { ConfigComponent } from './components/config/config.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { SecurityComponent } from './components/security/security.component';
-
+// Servicios
+import { UsersService } from './users/users.service';
 registerLocaleData(en);
 
 @NgModule({
@@ -50,7 +51,7 @@ registerLocaleData(en);
     DemoNgZorroAntdModule,
     ReactiveFormsModule
   ],
-  providers: [
+  providers: [ UsersService,
     { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]
