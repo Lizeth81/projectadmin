@@ -20,3 +20,9 @@
     font-family: 'Times New Roman', serif;
     font-weight: bold;
 }
+
+nz-layout{
+    
+	position: sticky;
+	top: 0; 
+}
