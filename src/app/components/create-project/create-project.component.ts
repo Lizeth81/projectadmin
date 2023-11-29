@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { AbstractControl, FormControl, FormGroup, NonNullableFormBuilder, ValidatorFn, Validators} from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, NonNullableFormBuilder, ValidationErrors, 
+  ValidatorFn, Validators } from '@angular/forms';
+import { Observable, Observer } from 'rxjs';
+
 
 @Component({
   selector: 'app-create-project',
@@ -9,66 +11,62 @@ import { AbstractControl, FormControl, FormGroup, NonNullableFormBuilder, Valida
 
 })
 export class CreateProjectComponent {
+  radioValue = 'A';
+  validateForm: FormGroup<{
+    userName: FormControl<string>;
+    email: FormControl<string>;
+    password: FormControl<string>;
+    confirm: FormControl<string>;
+    comment: FormControl<string>;
+  }>;
 
-    validateForm: FormGroup<{
-      email: FormControl<string>;
-      password: FormControl<string>;
-      checkPassword: FormControl<string>;
-      nickname: FormControl<string>;
-      phoneNumberPrefix: FormControl<'+86' | '+87'>;
-      phoneNumber: FormControl<string>;
-      website: FormControl<string>;
-      captcha: FormControl<string>;
-      agree: FormControl<boolean>;
-    }>;
-    captchaTooltipIcon: NzFormTooltipIcon = {
-      type: 'info-circle',
-      theme: 'twotone'
-    };
-  
+    // LOGICA DEL FORMULARIO DE INFORMACIÓN BÁSICA
+
     submitForm(): void {
-      if (this.validateForm.valid) {
-        console.log('submit', this.validateForm.value);
-      } else {
-        Object.values(this.validateForm.controls).forEach(control => {
-          if (control.invalid) {
-            control.markAsDirty();
-            control.updateValueAndValidity({ onlySelf: true });
+      console.log('submit', this.validateForm.value);
+    }
+  
+    resetForm(e: MouseEvent): void {
+      e.preventDefault();
+      this.validateForm.reset();
+    }
+  
+    validateConfirmPassword(): void {
+      setTimeout(() => this.validateForm.controls.confirm.updateValueAndValidity());
+    }
+  
+    userNameAsyncValidator: AsyncValidatorFn = (control: AbstractControl) =>
+      new Observable((observer: Observer<ValidationErrors | null>) => {
+        setTimeout(() => {
+          if (control.value === 'JasonWood') {
+            // you have to return `{error: true}` to mark it as an error event
+            observer.next({ error: true, duplicated: true });
+          } else {
+            observer.next(null);
           }
-        });
-      }
-    }
+          observer.complete();
+        }, 1000);
+      });
   
-    updateConfirmValidator(): void {
-      /** wait for refresh value */
-      Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
-    }
-  
-    confirmationValidator: ValidatorFn = (control: AbstractControl): { [s: string]: boolean } => {
+    confirmValidator: ValidatorFn = (control: AbstractControl) => {
       if (!control.value) {
-        return { required: true };
+        return { error: true, required: true };
       } else if (control.value !== this.validateForm.controls.password.value) {
         return { confirm: true, error: true };
       }
       return {};
     };
   
-    getCaptcha(e: MouseEvent): void {
-      e.preventDefault();
-    }
-  
     constructor(private fb: NonNullableFormBuilder) {
       this.validateForm = this.fb.group({
+        comment: ['', [Validators.required]],
+        userName: ['', [Validators.required], [this.userNameAsyncValidator]],
         email: ['', [Validators.email, Validators.required]],
         password: ['', [Validators.required]],
-        checkPassword: ['', [Validators.required, this.confirmationValidator]],
-        nickname: ['', [Validators.required]],
-        phoneNumberPrefix: '+86' as '+86' | '+87',
-        phoneNumber: ['', [Validators.required]],
-        website: ['', [Validators.required]],
-        captcha: ['', [Validators.required]],
-        agree: [false]
+        confirm: ['', [this.confirmValidator]]
+        
       });
     }
+
   }
 

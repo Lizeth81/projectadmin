@@ -26,6 +26,7 @@ import { SecurityComponent } from './components/security/security.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { DraftComponent } from './components/draft/draft.component';
 import { ProjectfinalComponent } from './components/projectfinal/projectfinal.component';
+import { HomeAdminComponent } from './components/home-admin/home-admin.component';
 
 registerLocaleData(en);
 
@@ -45,7 +46,8 @@ registerLocaleData(en);
     SecurityComponent,
     CreateProjectComponent,
     DraftComponent,
-    ProjectfinalComponent
+    ProjectfinalComponent,
+    HomeAdminComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { HomeAdminComponent } from './components/home-admin/home-admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { StudentProjectComponent } from './components/student-project/student-project.component';
 import { UserComponent } from './components/user/user.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
     children: [
         { path: '', pathMatch: 'full', redirectTo: 'Seira'},
         { path: 'Seira', component:HomeComponent},  
+        { path: 'SeiraCronogram', component:HomeAdminComponent},
         { path: 'StudenProject', component:StudentProjectComponent},        
         { path: 'Users', component:UserComponent},   
         { path: 'CreateProject', component:CreateProjectComponent},

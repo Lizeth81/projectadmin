@@ -1,0 +1,65 @@
+<nz-layout>
+    <nz-header> 
+      <h3 class="from-tittle">CRONOGRAMA DE ENTREGAS</h3>
+    <hr>
+    </nz-header>
+
+      <nz-content >
+        <div class="inner-content">
+    <br />
+    <br />
+     <button nz-button (click)="addRow()" nzType="primary">Añadir nueva fecha de entrega</button>
+    <br />
+    <br />
+    <br />
+    <nz-table #editRowTable nzBordered [nzData]="listOfData">
+      <thead>
+        <tr>
+          <th>Proceso</th>
+          <th>Fecha de entrega del estudiante</th>
+          <th>Fecha de sesión del comité</th>
+          <th>Fecha de entrega de resultados</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+          <tbody>
+            <tr *ngFor="let data of editRowTable.data" class="editable-row">
+                <!-- <ng-container *ngIf="!editCache[data.id].edit; else editTemplate"> -->
+                    <td>{{ data.proceso }}</td>
+                    <td>{{ data.entrega }}</td>
+                    <td> {{ data.comite }}</td>
+                    <td>{{ data.resultado }}</td>
+                    <td>
+                        <a (click)="startEdit(data.id)"><span nz-icon nzType="edit" nzTheme="outline" class="icons"></span></a>
+                        <a nz-popconfirm nzPopconfirmTitle="¿Estas seguro de eliminar el usuario?" (nzOnConfirm)="deleteRow(data.id)">
+                            <span nz-icon nzType="delete" nzTheme="outline" style="color: red;" class="icons"></span>
+                        </a>
+                    </td>
+                <!-- </ng-container> -->
+                <ng-template #editTemplate>
+                    <td>{{ data.id }}</td>
+                    <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.proceso" /></td>
+                    <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.entrega" /></td>
+                    <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.comite" /></td>
+                    <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.resultado" /></td>
+                    
+                    <td>
+                        <a (click)="saveEdit(data.proceso)" class="save">
+                            <span nz-icon nzType="check-circle" nzTheme="outline" style="color: rgb(102, 255, 0);" class="icons"></span>
+                        </a>
+                        <a nz-popconfirm nzPopconfirmTitle="¿Seguro  desea cancelar?" (nzOnConfirm)="cancelEdit(data.id)">
+                            <span nz-icon nzType="close-circle" nzTheme="outline" style="color: red;" class="icons"></span>
+                        </a>
+                    </td>
+                </ng-template>
+
+        </tr>
+      </tbody>
+    </nz-table> 
+  </div>
+           
+    </nz-content>
+</nz-layout>
+  
+  
+  

@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout class="principal">
     <!--MENU-->
     <nz-sider nzCollapsible class="form-menu">
         <nz-sider nzCollapsible nzWidth="200px">
@@ -7,38 +7,149 @@
                 <img class="img-logo" src="../../../assets/logo-udes-sm.png">
             </div>
             <!--MENU-->
+            <!-- <li nz-menu-item  routerLink="StudenProject" routerLinkActive="active">
+                <span nz-icon nzType="user"></span>
+                <span>Estudiante</span>
+                </li> -->
+
+                <!-- ADMINISTRADOR -->
             <ul nz-menu nzTheme="dark" nzMode="inline">
+                <li nz-menu-item nzSelected routerLink="SeiraCronogram" routerLinkActive="active">
+                    <span nz-icon nzType="home" nzTheme="outline"></span>
+                    <span>Inicio</span>
+                </li>
+            
+                <!-- ESTUDIANTE, DIRECTOR, CODIRECTOR Y JURADO -->
                 <li nz-menu-item nzSelected routerLink="Seira" routerLinkActive="active">
                     <span nz-icon nzType="home" nzTheme="outline"></span>
                     <span>Inicio</span>
                 </li>
-                <li nz-menu-item  routerLink="StudenProject" routerLinkActive="active">
-                    <span nz-icon nzType="user"></span>
-                    <span>Estudiante</span>
-                </li>
-                <li nz-submenu nzTitle="Trabajo de grado" nzIcon="file">
+
+                <!-- ESTUDIANTE -->
+                <li nz-submenu nzTitle="Trabajo de grado" nzIcon="folder">
                     <ul>
-                        <li nz-menu-item routerLink="propuestaGrado" routerLinkActive="active">Propuesta de grado</li>
-                        <li nz-menu-item routerLink="anteproyecto" routerLinkActive="active">Anteproyecto</li>
-                        <li nz-menu-item routerLink="projectfinal" routerLinkActive="active">Trabajo Final</li>
-        
+                        <li nz-menu-item routerLink="CreateProject" routerLinkActive="active">
+                            <span nz-icon nzType="fund-projection-screen"></span>
+                            <span>Presentación proyecto</span>
+                        </li>
+
+                        <li nz-menu-item routerLink="propuestaGrado" routerLinkActive="active">
+                            <span nz-icon nzType="file"></span>
+                            <span>Propuesta de grado</span>
+                        </li>
+
+                        <li nz-menu-item routerLink="anteproyecto" routerLinkActive="active">
+                            <span nz-icon nzType="file"></span>
+                            <span>Anteproyecto</span>
+                        </li>
+
+                        <li nz-menu-item routerLink="projectfinal" routerLinkActive="active"> 
+                            <span nz-icon nzType="file"></span>
+                            <span>Trabajo Final</span>
+                        </li>        
                     </ul>
                 </li>
+
+                <!-- ADMINISTRADOR -->
+                <li nz-submenu nzTitle="Proyectos" nzIcon="project">
+                    <ul>
+                        <li nz-menu-item routerLink="propuestaGrado" routerLinkActive="active">
+                            <span nz-icon nzType="file"></span>
+                            <span>Propuesta de grado</span>
+                        </li>
+
+                        <li nz-menu-item routerLink="anteproyecto" routerLinkActive="active">
+                            <span nz-icon nzType="file"></span>
+                            <span>Anteproyecto</span>
+                        </li>
+
+                        <li nz-menu-item routerLink="projectfinal" routerLinkActive="active"> 
+                            <span nz-icon nzType="file"></span>
+                            <span>Trabajo Final</span>
+                        </li>        
+                    </ul>
+                </li>
+
+                <!-- DIRECTOR Y CODIRECTOR -->
+                <li nz-submenu nzTitle="Revisión" nzIcon="folder-view">
+                    <ul>
+                        <li nz-menu-item routerLink="propuestaGrado" routerLinkActive="active">
+                            <span nz-icon nzType="file"></span>
+                            <span>Propuesta de grado</span>
+                        </li>
+
+                        <li nz-menu-item routerLink="anteproyecto" routerLinkActive="active">
+                            <span nz-icon nzType="file"></span>
+                            <span>Anteproyecto</span>
+                        </li>
+
+                        <li nz-menu-item routerLink="projectfinal" routerLinkActive="active"> 
+                            <span nz-icon nzType="file"></span>
+                            <span>Trabajo Final</span>
+                        </li>        
+                    </ul>
+                </li>
+
+                <!-- JURADO -->
+                <li nz-submenu nzTitle="Evaluación" nzIcon="file-protect">
+                    <ul>
+                        <li nz-menu-item routerLink="propuestaGrado" routerLinkActive="active">
+                            <span nz-icon nzType="file"></span>
+                            <span>Propuesta de grado</span>
+                        </li>
+
+                        <li nz-menu-item routerLink="anteproyecto" routerLinkActive="active">
+                            <span nz-icon nzType="file"></span>
+                            <span>Anteproyecto</span>
+                        </li>
+
+                        <li nz-menu-item routerLink="projectfinal" routerLinkActive="active"> 
+                            <span nz-icon nzType="file"></span>
+                            <span>Trabajo Final</span>
+                        </li>       
+                    </ul>
+                </li>
+
+                <!-- ADMINISTRADOR -->
                 <li nz-submenu nzTitle="Administar usuarios" nzIcon="team">
                     <ul>
-                        <li nz-menu-item routerLink="Users" routerLinkActive="active">Usuarios</li>
-                        <li nz-menu-item routerLink="CreateProject" routerLinkActive="active">Crer proyecto</li>
-                        <li nz-menu-item routerLink="CreateUser" routerLinkActive="active">Crear usuario</li>
+                        <li nz-menu-item routerLink="CreateUser" routerLinkActive="active">
+                            <span nz-icon nzType="user-add" nzTheme="outline"></span>
+                            <span>Crear usuario</span></li>
+                        <li nz-menu-item routerLink="Users" routerLinkActive="active">
+                            <span nz-icon nzType="user" nzTheme="outline"></span>
+                            <span>Usuarios</span>
+                        </li> 
                     </ul>
                 </li>
+
+                <!-- ADMINISTRADOR, DIRECTOR, CODIRECTOR Y JURADO -->
                 <li nz-menu-item routerLink="Configuration" routerLinkActive="active">
                     <span nz-icon nzType="setting"></span>
                     <span>Configuración</span>
                 </li>
+
+                <!-- ESTUDIANTE -->
+                <li nz-submenu nzTitle="Configuración" nzIcon="setting">
+                    <ul>
+                    <li nz-menu-item routerLink="projectfinal" routerLinkActive="active">
+                        <span nz-icon nzType="user"></span>
+                        <span>Usuario</span>
+                    </li>
+                    <li nz-menu-item routerLink="propuestaGrado" routerLinkActive="active">
+                        <span nz-icon nzType="file" nzTheme="outline"></span>
+                        <span>Proyecto</span>
+                    </li>
+                       
+                    </ul>
+                </li>
+                
+                <!-- TODOS LOS ROLES -->
                 <li nz-menu-item (click)="signOut()">
-                    <span nz-icon nzType="close"></span>
+                    <span nz-icon nzType="logout"></span>
                     <span>Cerrar sesión</span>
                 </li>
+
                 <!--Modal de cerrar sesión-->
                 <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
                     <ng-template #modalTitle class="modal-title">

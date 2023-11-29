@@ -15,20 +15,16 @@ nz-header {
     height: 80px;
 }
 
-.inner-content {
-    /* padding: 10px; */
+/* .inner-content {
+    
     background: #fff;
     min-height: 460px;
     justify-content: center;
     align-items: center;
     display: flex;
     
-}
+} */
 
-
-.phone-select {
-    width: 70px;
-}
 
 .registroproyecto1{
     width: 360px;
@@ -44,4 +40,59 @@ nz-header {
     margin-bottom: 8px;
 }
     
+.h3 {
+    font-family: 'Times New Roman', serif;
+    font-weight: 200;
+    text-align: left
+    
+}
+
+.titulo{
+    background: #fff;
+}
+
+nz-content{
+    background: #fff;
+}
+
+
+nz-breadcrumb {
+    margin: 16px 0;
+}
+
+.inner-content {
+    padding: 10px;
+    background: #fff;
+    min-height: 350px;
+} 
+
+.editable-cell {
+    position: relative;
+    padding: 5px 12px;
+    cursor: pointer;
+}
+
+.editable-row:hover .editable-cell {
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    padding: 4px 11px;
+}
+
+.button-commit {
+    display: flex;
+    justify-content: center;
+}
+
+[nz-form] {
+    max-width: 600px;
+    background: #fff;
+  }
+
+  button {
+    margin-left: 8px;
+  }
+
   
+
+
+
