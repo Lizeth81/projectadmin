@@ -11,6 +11,7 @@ import { Observable, Observer } from 'rxjs';
 
 })
 export class CreateProjectComponent {
+  selectedValue = null;
   radioValue = 'A';
   validateForm: FormGroup<{
     userName: FormControl<string>;

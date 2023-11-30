@@ -4,46 +4,58 @@
     </nz-header>
                <!-- FORMULARIO BASICO --> 
 
-               <div class="inner-content">
+               <div class="centrar-contenedor">
                 <br />
                 <br />
-                <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                <div class="mat-elevation-z8 centrar-contenedor">  
+                <form class="formulario" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     
                   
                     <nz-form-item> 
-                        <nz-form-label [nzSpan]="7" nzRequired>Titulo del proyecto</nz-form-label>
-                        <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please write something here!">
+                        <nz-form-label class="textarea-fijo" [nzSpan]="7" nzRequired>Titulo del proyecto</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="¡Por favor escribe algo aquí!">
                           <nz-textarea-count [nzMaxCharacterCount]="2000">
                             <textarea formControlName="comment" nz-input rows="2" placeholder="Titulo del proyecto de grado"></textarea>
                           </nz-textarea-count>
                         </nz-form-control>
                     </nz-form-item>
-                    
+
+                    <nz-form-item>
+                    <nz-form-label [nzSpan]="7" nzRequired>Integrantes:</nz-form-label>
+                    <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="¡Por favor escribe algo aquí!">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecciona integrantes" [(ngModel)]="selectedValue">
+                      <nz-option nzLabel="1 integrante" nzValue="1 integrante"></nz-option>
+                      <nz-option nzLabel="2 integrante" nzValue="2 integrante"></nz-option>
+                      <nz-option nzLabel="3 integrante" nzValue="3 integrante"></nz-option>
+                      <nz-option nzLabel="4 integrante" nzValue="4 integrante"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                  </nz-form-item> 
                    
                     <nz-form-item>
                       <nz-form-label [nzSpan]="7" nzRequired>Autor</nz-form-label>
-                      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating...">
+                      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validando...">
                         <input nz-input formControlName="userName" placeholder="Nombre del integrante del proyecto" />
                       </nz-form-control>
                     </nz-form-item>
     
                     <nz-form-item>
                         <nz-form-label [nzSpan]="7" nzRequired>Autor</nz-form-label>
-                        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating...">
+                        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validando...">
                           <input nz-input formControlName="userName" placeholder="Nombre del integrante del proyecto" />
                         </nz-form-control>
                       </nz-form-item>
     
                       <nz-form-item>
                         <nz-form-label [nzSpan]="7" nzRequired>Director</nz-form-label>
-                        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating...">
+                        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validando..">
                           <input nz-input formControlName="userName" placeholder="Nombre del director del proyecto" />
                         </nz-form-control>
                       </nz-form-item>
            
                       <nz-form-item>
                         <nz-form-label [nzSpan]="7" nzRequired>Codirector</nz-form-label>
-                        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." >
+                        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validando..." >
                           <input nz-input formControlName="userName" placeholder="Nombre del codirector del proyecto" />
                         </nz-form-control>
                       </nz-form-item>
@@ -56,8 +68,8 @@
                       </nz-form-item>    
 
                     <nz-form-item>
-                        <nz-form-label  nzRequired>Pertenece a un 
-                        <br >semillero de investigación</nz-form-label>
+                        <nz-form-label  nzRequired>Pertenece a un semillero 
+                        <br >de investigación</nz-form-label>
                         <nz-form-control [nzSpan]="12" nzHasFeedback >
                             <nz-radio-group [(ngModel)]="radioValue">
                                 <label nz-radio nzValue="A">Si</label>
@@ -81,7 +93,8 @@
                         <button nz-button (click)="resetForm($event)">Editar</button>
                       </nz-form-control>
                     </nz-form-item>
-  
+                  
                   </form>
                 </div>
+          </div>
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 interface ItemData { 
@@ -9,6 +11,10 @@ interface ItemData {
   comite: string;
   resultado: string;
 }
+
+@Injectable({
+  providedIn: 'root'
+})
 
 
 
@@ -20,20 +26,30 @@ interface ItemData {
 export class HomeAdminComponent implements OnInit  {
   isVisible = false;
   isOkLoading = false;
+  
 
   // formulario
 
+  formulario: FormGroup;
 
- 
- 
-  
-  constructor(private modal: NzModalService) { }
-  
-
-  // modal
-  showModal(): void {
-    this.isVisible = true;
+  constructor(private fb: FormBuilder, private modal: NzModalService) {
+    this.formulario = this.fb.group({
+      // Define aquí los campos de tu formulario
+      nombre: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      // ... Otros campos según tus necesidades
+    });
   }
+
+  guardar(): void {
+    // Lógica para guardar los datos del formulario
+  }
+ 
+ 
+  
+  // constructor(private modal: NzModalService) { }
+  
+
 
   handleOk(): void {
     this.addRow;

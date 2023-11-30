@@ -1,0 +1,40 @@
+<nz-layout>
+    <nz-header> 
+        <h3 class="from-tittle">LISTA PROPUESTAS DE TRABAJO DE GRADO</h3>
+     <hr>
+    </nz-header>
+    <nz-content>
+        <div class="container">
+        <br />
+
+        <nz-table
+        nzShowSizeChanger
+        [nzData]="listOfRandomUser"
+        [nzFrontPagination]="false"
+        [nzLoading]="loading"
+        [nzTotal]="total"
+        [nzPageSize]="pageSize"
+        [nzPageIndex]="pageIndex"
+        (nzQueryParams)="onQueryParamsChange($event)"
+      >
+        <thead>
+          <tr>
+            <th class="centrar" nzColumnKey="proyecto" [nzSortFn]="true">Titulo del proyecto</th>
+            <th class="centrar" nzColumnKey="estado" [nzFilters]="filterGender" [nzFilterFn]="true">Estado</th>
+            <th class="centrar" nzColumnKey="accion">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOfRandomUser">
+            <td>{{ data.proyecto }}</td>
+            <td>{{ data.estado }} </td>
+            <td>{{ data.accion }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+
+ 
+        </div>
+    </nz-content>
+</nz-layout>
+ 

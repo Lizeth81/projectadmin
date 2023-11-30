@@ -15,17 +15,6 @@ nz-header {
     height: 80px;
 }
 
-/* .inner-content {
-    
-    background: #fff;
-    min-height: 460px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    
-} */
-
-
 .registroproyecto1{
     width: 360px;
 
@@ -60,12 +49,6 @@ nz-breadcrumb {
     margin: 16px 0;
 }
 
-.inner-content {
-    padding: 10px;
-    background: #fff;
-    min-height: 350px;
-} 
-
 .editable-cell {
     position: relative;
     padding: 5px 12px;
@@ -83,15 +66,31 @@ nz-breadcrumb {
     justify-content: center;
 }
 
-[nz-form] {
-    max-width: 600px;
-    background: #fff;
-  }
-
   button {
     margin-left: 8px;
   }
 
+  .centrar-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 102vh; /* O ajusta esto según tus necesidades */
+    background: #fff;
+  }
+  
+  .formulario {
+    width: 600px; /* O ajusta esto según el ancho de tu formulario */
+  }
+
+  nz-select {
+    width: 300px;
+  }
+
+  /* .textarea-fijo { */
+    /* resize:none; */
+    /* width: 300px; Ajusta el ancho según tus necesidades */
+    /* height: 100px; Ajusta la altura según tus necesidades */
+  /* } */
   
 
 
