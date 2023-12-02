@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/users/users.service';
+import { UsersService } from 'src/app/services/users.service';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -19,15 +20,17 @@ export class LoginComponent implements OnInit {
     pass: ['', [Validators.required]]
   });
   
-  enviarDatos(){
+  enviarDatosLogin(){
       const dataUser = {correo: this.validateForm.value.correo, pass: this.validateForm.value.pass};
-      this.userService.Login(dataUser).subscribe(data => {
-        if(data.success){
-          console.log("data:",data);
+      this.userService.Login(dataUser).subscribe(data => {        
+         if(data.success){          
+          console.log("data:",data);                  
+          this.userService.setToken(data.token);
+          this.userService.setUserLogged(data._id);
           this.modal.success({
             nzContent: '¡Bienvenido al sistema de administración de proyecto de grado!'
             });
-          this.router.navigate(['/Home']);
+          this.router.navigateByUrl("/Seira");           
         }else{
           this.modal.error({
             nzTitle: '¡Datos invalidos!',
@@ -45,35 +48,6 @@ export class LoginComponent implements OnInit {
 
   
     ngOnInit(): void {
-      
-    }   
-
-  /*submitForm() {        
-    if (this.validateForm.valid) {
-      const dataUser = {correo: this.validateForm.get('correo') , pass: this.validateForm.get('pass')};
-      this.userService.Login(dataUser).subscribe(data => {
-        console.log(data);
-        this.modal.success({
-          nzContent: '¡Bienvenido al sistema de administración de proyecto de grado!'
-          });
-        this.router.navigate(['/Home']);
-        console.log('submit', this.validateForm.value);
-      });
-        
-      }else {
-        this.modal.error({
-          nzTitle: '¡Datos invalidos!',
-          nzContent: 'Usurio y/o contraseña son incorectos'
-        });  
-        Object.values(this.validateForm.controls).forEach(control => {
-       if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-
-        
-      });
-    }
-  }*/ 
-   
+     // this.enviarDatosLogin();
+    }      
 }

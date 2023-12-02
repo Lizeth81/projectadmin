@@ -1,16 +1,30 @@
 <nz-layout>
-    <!--MENU-->
-    <nz-sider nzCollapsible class="form-menu">
-        <app-sidenav></app-sidenav>
-    </nz-sider>
-    <!--CONTENIDO-->
-    <nz-layout>
-        <nz-content>
-            <div class="inner-content">
-                <router-outlet></router-outlet>
-            </div>
-        </nz-content>
-        <!--PIE DE PAGINA-->
-        <nz-footer>Todos los derechos reservados ©2023 Universidad de santander campus Cúcuta</nz-footer>
-    </nz-layout>
+    <nz-header>
+        <h3 class="from-tittle">CALENDARIO DE PROYECTO DE GRADO</h3>
+        <hr>
+        <br>
+    </nz-header>
+    <nz-content>
+        <div *ngIf="periodo">
+            <h3>Calendario semestral Periodo: {{periodo}}</h3>
+        </div>
+        <nz-table nzSize="middle">
+            <thead>
+                <tr class="stiloTr">
+                    <th>Proceso</th>
+                    <th>Fecha de entrega del estudiante</th>
+                    <th>Fecha de sesión de comité</th>
+                    <th>Fecha de entrega de resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of Datos">
+                    <td>{{item.proceso}}</td>
+                    <td>{{item.fechaEntrega}}</td>
+                    <td>{{item.fechaSesioncomite}}</td>
+                    <td>{{item.fechaResultado}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </nz-content>
 </nz-layout>

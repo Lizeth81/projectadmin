@@ -8,7 +8,8 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CookieService } from "ngx-cookie-service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoNgZorroAntdModule } from './ng-zorro-antd.module';
 //componentes
@@ -16,7 +17,6 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HeaderComponent } from './components/header/header.component';
-import { StudentProjectComponent } from './components/student-project/student-project.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { ProposedgradeComponent } from './components/proposedgrade/proposedgrade.component';
@@ -24,7 +24,8 @@ import { ConfigComponent } from './components/config/config.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { SecurityComponent } from './components/security/security.component';
 // Servicios
-import { UsersService } from './users/users.service';
+import { UsersService } from './services/users.service';
+import { JwtInterceptor } from './shared/helpers/jwt.interceptor'
 registerLocaleData(en);
 
 @NgModule({
@@ -34,7 +35,6 @@ registerLocaleData(en);
     HomeComponent,
     SidenavComponent,
     HeaderComponent,
-    StudentProjectComponent,
     UserComponent,
     CreateUserComponent,
     ProposedgradeComponent,
@@ -51,7 +51,8 @@ registerLocaleData(en);
     DemoNgZorroAntdModule,
     ReactiveFormsModule
   ],
-  providers: [ UsersService,
+  providers: [ UsersService, CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},    
     { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]

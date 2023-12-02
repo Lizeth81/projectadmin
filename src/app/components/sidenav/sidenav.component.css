@@ -20,3 +20,17 @@
     font-family: 'Times New Roman', serif;
     font-weight: bold;
 }
+
+nz-content {
+    margin: 0 16px;
+}
+
+.inner-content {
+    padding: 10px;
+    background: #fff;
+    min-height: 100vh;
+}
+
+nz-footer {
+    text-align: center;
+}

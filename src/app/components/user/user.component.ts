@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { UsersService } from 'src/app/users/users.service';
+import { UsersService } from 'src/app/services/users.service';
 
 /*interface ItemData {
   id: string;
