@@ -14,9 +14,10 @@ nz-content {
     min-height: 400px;
 }
 .from-tittle {
-    font-family: 'Times New Roman', serif;
+    font-family: 'ineherit', serif;
     font-weight: bold;
     text-align: center;
+    font-size: 20px;
 }
 
 .inner-content {

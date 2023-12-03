@@ -18,6 +18,13 @@
     padding: 20px;
 }
 
+.from-tittle {
+  font-family: 'ineherit', serif;
+  font-weight: bold;
+  text-align: center;
+  font-size: 20px;
+}
+
 .boton{
 
     width: 25px;

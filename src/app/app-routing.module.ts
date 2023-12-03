@@ -22,6 +22,7 @@ import { ProjectfinalAdminComponent } from './components/projectfinal-admin/proj
 import { ConfigComponent } from './components/config/config.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { SecurityComponent } from './components/security/security.component';
+import { InfoprojectDirectorComponent } from './components/infoproject-director/infoproject-director.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
         { path: 'projectfinal', component:ProjectfinalComponent},
         { path: 'proyectoFinalAdmin', component:ProjectfinalAdminComponent},
         { path: 'proyectoFinalJurado', component:ProjectfinalJuradoComponent},
+        { path: 'informacionProyectoDirector', component:InfoprojectDirectorComponent},
         { path: 'Configuration', component:ConfigComponent,
           children: [
             { path: '', pathMatch: 'full', redirectTo: 'PersonalInformation'},
