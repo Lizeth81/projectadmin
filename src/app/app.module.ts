@@ -26,6 +26,15 @@ import { SecurityComponent } from './components/security/security.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { DraftComponent } from './components/draft/draft.component';
 import { ProjectfinalComponent } from './components/projectfinal/projectfinal.component';
+import { ProposedgradeDirectorComponent } from './components/proposedgrade-director/proposedgrade-director.component';
+import { AnteproyectoDirectorComponent } from './components/anteproyecto-director/anteproyecto-director.component';
+import { ProyectofinaldirComponent } from './components/proyectofinaldir/proyectofinaldir.component';
+import { ProposedgradeJuradoComponent } from './components/proposedgrade-jurado/proposedgrade-jurado.component';
+import { AnteproyectoJuradoComponent } from './components/anteproyecto-jurado/anteproyecto-jurado.component';
+import { ProjectfinalJuradoComponent } from './components/projectfinal-jurado/projectfinal-jurado.component';
+import { ProposedgradeAdminComponent } from './components/proposedgrade-admin/proposedgrade-admin.component';
+import { AnteproyectoAdminComponent } from './components/anteproyecto-admin/anteproyecto-admin.component';
+import { ProjectfinalAdminComponent } from './components/projectfinal-admin/projectfinal-admin.component';
 
 registerLocaleData(en);
 
@@ -45,7 +54,16 @@ registerLocaleData(en);
     SecurityComponent,
     CreateProjectComponent,
     DraftComponent,
-    ProjectfinalComponent
+    ProjectfinalComponent,
+    ProposedgradeDirectorComponent,
+    AnteproyectoDirectorComponent,
+    ProyectofinaldirComponent,
+    ProposedgradeJuradoComponent,
+    AnteproyectoJuradoComponent,
+    ProjectfinalJuradoComponent,
+    ProposedgradeAdminComponent,
+    AnteproyectoAdminComponent,
+    ProjectfinalAdminComponent
   ],
   imports: [
     BrowserModule,

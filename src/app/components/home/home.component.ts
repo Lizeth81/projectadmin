@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
 
-<<<<<<< HEAD
 interface ItemData {
   id: string;
   mes: string;  
   entregaEstudiante: string;
   sesionComite: string;
   entregaPropuesta: string;
-=======
+}
+
 interface DataItem {
   proceso: string;
   entrega: string;
@@ -24,7 +24,6 @@ interface ColumnItem {
   filterFn: NzTableFilterFn<DataItem> | null;
   filterMultiple: boolean;
   sortDirections: NzTableSortOrder[];
->>>>>>> 225d08174d40b34268d90a4b13329ddf507bed57
 }
 
 @Component({
@@ -34,7 +33,7 @@ interface ColumnItem {
   
 })
 export class HomeComponent {
-<<<<<<< HEAD
+
   i = 0;
   editId: string | null = null;
   listOfData: ItemData[] = [];
@@ -60,7 +59,7 @@ export class HomeComponent {
     this.addRow();
   }
 
-=======
+
  
  
     data = [
@@ -84,6 +83,7 @@ export class HomeComponent {
       }
     ];
   
->>>>>>> 225d08174d40b34268d90a4b13329ddf507bed57
  
-}
+  }
+
+

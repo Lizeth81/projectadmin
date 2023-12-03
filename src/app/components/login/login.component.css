@@ -2,6 +2,7 @@
     width: 150px;
     height: 50px;
     margin-top: 15px;
+
 }
 
 .form-background {
@@ -9,6 +10,7 @@
     width: 100vw;
     height: 100vh;
     background-size: cover;
+    font-family: 'inherit'; 
 }
 
 .form-contenido {
@@ -24,12 +26,14 @@
     backdrop-filter: blur(3px);
     padding: 50px 30px 30px 30px;
     border-radius: 16px;
+    font-family: 'inherit';
 }
 
 .title-login {
     text-align: center;
-    font-family: 'Times New Roman', serif;
+    font-family: 'inherit';
     font-weight: bold;
+    font-size: 22px;
     margin-bottom: 15px;
 }
 
@@ -44,3 +48,33 @@
 .login-form-button {
     width: 100%;
 }
+
+.text-primary{
+    color: #2d70aa;
+}
+
+.login-form-button {
+    background-color: #28537e;
+    border-color: #28537e;;
+}
+
+.logo-img{
+    position: relative;
+    width: 340px;
+    height: 130px;
+    left: 40px;
+    top: 10px;
+}
+
+/* .texto{
+    position: relative;
+    width: 340px;
+    height: 130px;
+    left: 970px;
+    bottom: 120px;
+
+}  */
+
+
+
+
