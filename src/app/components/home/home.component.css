@@ -9,16 +9,15 @@ nz-header {
     text-align: center;
 }
 
-<<<<<<< HEAD
 nz-content {
     background: #fff;
     min-height: 400px;
-=======
+}
 .from-tittle {
-    font-family: 'Times New Roman', serif;
+    font-family: 'ineherit', serif;
     font-weight: bold;
     text-align: center;
->>>>>>> 225d08174d40b34268d90a4b13329ddf507bed57
+    font-size: 20px;
 }
 
 .inner-content {

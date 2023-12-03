@@ -8,11 +8,21 @@ import { UserComponent } from './components/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { ProposedgradeComponent } from './components/proposedgrade/proposedgrade.component';
+import { ProposedgradeJuradoComponent } from './components/proposedgrade-jurado/proposedgrade-jurado.component';
+import { ProposedgradeDirectorComponent } from './components/proposedgrade-director/proposedgrade-director.component';
+import { ProposedgradeAdminComponent } from './components/proposedgrade-admin/proposedgrade-admin.component';
+import { AnteproyectoDirectorComponent } from './components/anteproyecto-director/anteproyecto-director.component';
+import { AnteproyectoJuradoComponent } from './components/anteproyecto-jurado/anteproyecto-jurado.component';
+import { AnteproyectoAdminComponent } from './components/anteproyecto-admin/anteproyecto-admin.component';
 import { DraftComponent } from './components/draft/draft.component';
 import { ProjectfinalComponent } from './components/projectfinal/projectfinal.component';
+import { ProyectofinaldirComponent } from './components/proyectofinaldir/proyectofinaldir.component';
+import { ProjectfinalJuradoComponent } from './components/projectfinal-jurado/projectfinal-jurado.component';
+import { ProjectfinalAdminComponent } from './components/projectfinal-admin/projectfinal-admin.component';
 import { ConfigComponent } from './components/config/config.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { SecurityComponent } from './components/security/security.component';
+import { InfoprojectDirectorComponent } from './components/infoproject-director/infoproject-director.component';
 
 
 const routes: Routes = [
@@ -26,8 +36,18 @@ const routes: Routes = [
         { path: 'CreateProject', component:CreateProjectComponent},
         { path: 'CreateUser', component:CreateUserComponent},     
         { path: 'propuestaGrado', component:ProposedgradeComponent },
+        { path: 'propuestaGradoDir', component:ProposedgradeDirectorComponent},
+        { path: 'propuestaGradoJurado', component:ProposedgradeJuradoComponent},
+        { path: 'propuestaGradoAdmin', component: ProposedgradeAdminComponent},
         { path: 'anteproyecto', component:DraftComponent },
+        { path: 'anteproyetoDir', component:AnteproyectoDirectorComponent},
+        { path: 'anteproyectoJurado', component:AnteproyectoJuradoComponent},
+        { path: 'anteproyectoAdmin', component:AnteproyectoAdminComponent},
+        { path: 'proyectofinaldir', component:ProyectofinaldirComponent},
         { path: 'projectfinal', component:ProjectfinalComponent},
+        { path: 'proyectoFinalAdmin', component:ProjectfinalAdminComponent},
+        { path: 'proyectoFinalJurado', component:ProjectfinalJuradoComponent},
+        { path: 'informacionProyectoDirector', component:InfoprojectDirectorComponent},
         { path: 'Configuration', component:ConfigComponent,
           children: [
             { path: '', pathMatch: 'full', redirectTo: 'PersonalInformation'},

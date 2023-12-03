@@ -6,7 +6,7 @@ import { AbstractControl, FormControl, FormGroup, NonNullableFormBuilder, Valida
 @Component({
   selector: 'app-infoproject-director',
   templateUrl: './infoproject-director.component.html',
-  styleUrls: ['./infoproject-director.component.css'] 
+  styleUrls: ['./infoproject-director.component.css']
 })
 export class InfoprojectDirectorComponent {
   validateForm: FormGroup<{
