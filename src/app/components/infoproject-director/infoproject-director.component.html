@@ -1,0 +1,86 @@
+<div class="formContenido">
+    <div>
+        <h3 class="from-tittle">NOMBRE DEL PROYECTO</h3>
+        <hr>
+        <br>
+    </div>
+<div>
+    <h3>Información básica del proyecto:</h3>
+</div>
+    
+    <div class="columna">
+        <div  nz-row [nzGutter]="8">
+          <div class="primera" nz-col [nzSpan]="12">
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24">Fecha</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" >
+                    <input nz-input [disabled]="true" id="email" class="registroproyecto"/>
+                  </nz-form-control>
+                  </nz-form-item>
+
+                <nz-form-item>
+                  <nz-form-label [nzSm]="6" [nzXs]="24">Proceso</nz-form-label>
+                  <nz-form-control [nzSm]="14" [nzXs]="24" >
+                  <input nz-input [disabled]="true" id="email" class="registroproyecto"/>
+                </nz-form-control>
+                </nz-form-item>
+          
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24">Autor</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" >
+                    <input nz-input [disabled]="true" id="email" class="registroproyecto"/>
+                  </nz-form-control>
+                  </nz-form-item>   
+                  
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24">Director</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" >
+                    <input nz-input [disabled]="true" id="email" class="registroproyecto"/>
+                  </nz-form-control>
+                </nz-form-item>
+                         
+
+            </form>
+
+          </div>
+          <div class="segunda" nz-col [nzSpan]="12">
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24">Estado</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" >
+                    <input nz-input [disabled]="true" id="email" class="registroproyecto"/>
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24">Autor</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" >
+                    <input nz-input [disabled]="true" id="email" class="registroproyecto"/>
+                  </nz-form-control>
+                  </nz-form-item>   
+
+                <nz-form-item> 
+                    <nz-form-label [nzSm]="6" [nzXs]="24">Codirector</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" >
+                    <input nz-input [disabled]="true" id="email" class="registroproyecto"/>
+                  </nz-form-control>
+                  </nz-form-item>
+
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3>Correcciones sobre el proyecto:</h3>
+    </div>
+
+    <div>
+        <h3>Observaciones en el proyectp:</h3>
+    </div>
+
+
+</div>
+
+
