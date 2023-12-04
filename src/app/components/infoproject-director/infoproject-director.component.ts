@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { AbstractControl, FormControl, FormGroup, NonNullableFormBuilder, ValidatorFn, Validators} from '@angular/forms';
 
 
@@ -9,6 +10,9 @@ import { AbstractControl, FormControl, FormGroup, NonNullableFormBuilder, Valida
   styleUrls: ['./infoproject-director.component.css']
 })
 export class InfoprojectDirectorComponent {
+  project = {
+    nameProject: '',
+  }
   validateForm: FormGroup<{
     email: FormControl<string>;
     password: FormControl<string>;
@@ -69,5 +73,29 @@ export class InfoprojectDirectorComponent {
       agree: [false]
     });
   }
+
+  // tabla
+
+     /*Fecha*/
+     date = new Date();
+     fecha = this.date;
+     /*Nombre del proyecto*/
+ 
+   /*Funcion del boton cargar archivo*/
+   fileList: NzUploadFile[] = []; 
+ 
+  /*Ver comentario*/
+   isVisible = false;
+ 
+
+ 
+   showModal(): void {
+     this.isVisible = true;
+   }
+ 
+   handleOk(): void {
+     console.log('Button ok clicked!');
+     this.isVisible = false;
+   }
 
 }

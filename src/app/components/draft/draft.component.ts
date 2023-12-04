@@ -7,7 +7,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
   styleUrls: ['./draft.component.css']
 })
 export class DraftComponent {
-  project = {
+    project = {
     nameProject: '',
   }
     /*Fecha*/
