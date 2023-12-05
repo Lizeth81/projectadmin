@@ -1,33 +1,54 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
-import en from '@angular/common/locales/en';
+//import en from '@angular/common/locales/en';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CookieService } from "ngx-cookie-service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoNgZorroAntdModule } from './ng-zorro-antd.module';
-
+import { NzInputModule } from 'ng-zorro-antd/input';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+import { IconDefinition } from '@ant-design/icons-angular';
+//componentes
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HeaderComponent } from './components/header/header.component';
-import { StudentProjectComponent } from './components/student-project/student-project.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { ProposedgradeComponent } from './components/proposedgrade/proposedgrade.component';
 import { ConfigComponent } from './components/config/config.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { SecurityComponent } from './components/security/security.component';
-import { CreateProjectComponent } from './components/create-project/create-project.component';
-import { DraftComponent } from './components/draft/draft.component';
-import { ProjectfinalComponent } from './components/projectfinal/projectfinal.component';
+import { SustainabilityComponent } from './components/sustainability/sustainability.component';
+import { PreliminaryProjectComponent } from './components/preliminary-project/preliminary-project.component';
+import { PreliminayProjectAdminComponent } from './components/preliminay-project-admin/preliminay-project-admin.component';
+import { PreliminayProjectDirectorComponent } from './components/preliminay-project-director/preliminay-project-director.component';
+import { PreliminayProjectJuradoComponent } from './components/preliminay-project-jurado/preliminay-project-jurado.component';
+import { FinalWorkComponent } from './components/final-work/final-work.component';
+import { FinalworkAdminComponent } from './components/finalwork-admin/finalwork-admin.component';
+import { FinalworkJuradoComponent } from './components/finalwork-jurado/finalwork-jurado.component';
+import { FinalworkDirectorComponent } from './components/finalwork-director/finalwork-director.component';
+import { InfoProjectDirectorComponent } from './components/info-project-director/info-project-director.component';
+import { ProposedGradeAdminComponent } from './components/proposed-grade-admin/proposed-grade-admin.component';
+import { ProposedGradeDirectorComponent } from './components/proposed-grade-director/proposed-grade-director.component';
+import { ProposedGradeJuradoComponent } from './components/proposed-grade-jurado/proposed-grade-jurado.component';
+import LocaleEsMx from '@angular/common/locales/es-CO';
+// Servicios
+import { UsersService } from './services/users.service';
+import { JwtInterceptor } from './shared/helpers/jwt.interceptor'
+registerLocaleData(LocaleEsMx);
 
-registerLocaleData(en);
+const antDesignIcons = AllIcons as {
+  [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
 
 @NgModule({
   declarations: [
@@ -36,16 +57,25 @@ registerLocaleData(en);
     HomeComponent,
     SidenavComponent,
     HeaderComponent,
-    StudentProjectComponent,
     UserComponent,
     CreateUserComponent,
     ProposedgradeComponent,
+    ProposedGradeAdminComponent,
+    ProposedGradeDirectorComponent,
+    ProposedGradeJuradoComponent,
     ConfigComponent,
     PersonalInformationComponent,
-    SecurityComponent,
-    CreateProjectComponent,
-    DraftComponent,
-    ProjectfinalComponent
+    SecurityComponent, 
+    SustainabilityComponent,
+    PreliminaryProjectComponent,
+    FinalWorkComponent,
+    FinalworkJuradoComponent,
+    FinalworkAdminComponent,
+    FinalworkDirectorComponent,
+    PreliminayProjectAdminComponent,
+    PreliminayProjectDirectorComponent,
+    PreliminayProjectJuradoComponent,
+    InfoProjectDirectorComponent
   ],
   imports: [
     BrowserModule,
@@ -54,10 +84,15 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     DemoNgZorroAntdModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzInputModule,
+    CommonModule
   ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US }
+  providers: [ UsersService, CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},    
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: NZ_ICONS, useValue: icons },
+    { provide: LOCALE_ID, useValue: 'es-CO'}
   ],
   bootstrap: [AppComponent]
 })

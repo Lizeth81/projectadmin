@@ -76,7 +76,6 @@ import { NzCronExpressionModule } from 'ng-zorro-antd/cron-expression';
 import { NzQRCodeModule } from 'ng-zorro-antd/qr-code';
 import { NzWaterMarkModule } from 'ng-zorro-antd/water-mark';
 
-
 @NgModule({
   exports: [
     NzAffixModule,

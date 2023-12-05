@@ -1,16 +1,103 @@
 <nz-layout>
-    <!--MENU-->
-    <nz-sider nzCollapsible class="form-menu">
-        <app-sidenav></app-sidenav>
-    </nz-sider>
-    <!--CONTENIDO-->
-    <nz-layout>
-        <nz-content>
-            <div class="inner-content">
-                <router-outlet></router-outlet>
-            </div>
-        </nz-content>
-        <!--PIE DE PAGINA-->
-        <nz-footer>Todos los derechos reservados ©2023 Universidad de santander campus Cúcuta</nz-footer>
-    </nz-layout>
+    <nz-header>
+        <nz-breadcrumb>
+            <app-header></app-header>
+            <hr>
+        </nz-breadcrumb>
+    </nz-header>
+    <nz-content>
+        <!--Botonoes para el crub del admin-->
+        <div class="from-buttons">
+            <!--BOTON DE AGREGAR-->
+            <button nz-button nzType="primary" (click)="VisualizarModalAdd()" *ngIf="botoneAgregar">Agregar</button>
+            <!--Modal de agregar data al calendario-->
+            <nz-modal [(nzVisible)]="isVisibleAdd" nzTitle="AGREGAR FECHA DEL CALENDARIO" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+                <ng-container>
+                    <form nz-form (ngSubmit)="agregarDatosCalendario()" method="post">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="10">Año</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback>
+                                <input nz-input type="number" formControlName="año" />
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="10">Perido</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback>
+                                <nz-select formControlName="periodo">
+                                    <nz-option nzValue="A" nzLabel="A"></nz-option>
+                                    <nz-option nzValue="B" nzLabel="B"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="10">Procesos</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback>
+                                <nz-select formControlName="proceso">
+                                    <nz-option nzValue="Option1" nzLabel="Propuesta de trabajo grado"></nz-option>
+                                    <nz-option nzValue="Option2" nzLabel="Anteproyecto"></nz-option>
+                                    <nz-option nzValue="Option3" nzLabel="Proyecto Final"></nz-option>
+                                    <nz-option nzValue="Option4" nzLabel="Sustentación"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="10">Fecha de entrega</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback>
+                                <nz-date-picker formControlName="fechaEntrega" (ngModelChange)="onChange($event)"></nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="10">Fecha de sesión de comité</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback>
+                                <nz-date-picker formControlName="fechaSesioncomite" (ngModelChange)="onChange($event)"></nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="10">Fecha de entrega de resultado</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback>
+                                <nz-date-picker formControlName="fechaResultado" (ngModelChange)="onChange($event)"></nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </ng-container>
+            </nz-modal>
+            <!--BOTON DE EDITAR-->
+            <button nz-button nzType="default" style="background-color: green; color: white;" (click)="editarDatosCalendario()" *ngIf="botoneEditar">Editar</button>
+            <!--Modal de agregar editar al fechas del calendario-->
+            <nz-modal [(nzVisible)]="isVisibleEdit" nzTitle="EDITAR LAS FECHAS DE CALENDARIO" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+                <ng-container *nzModalContent>
+                    <p>Content one</p>
+                    <p>Content two</p>
+                    <p>Content three</p>
+                </ng-container>
+            </nz-modal>
+            <!--BOTON DE ELIMINAR-->
+            <button nz-button nzType="primary" nzDanger (click)=" eliminarDatosCalendario()" *ngIf="botoneEliminar">Eliminar</button>
+        </div>
+        <!--tabla de contenido-->
+        <div>
+            <h3 style="font-weight: bold; font-family:New Roman">CALENDARIO DE PROYECTO DE GRADO</h3>
+        </div>
+        <div *ngIf="periodo">
+            <h3 style="color: red; font-weight: bold; font-family:New Roman">Periodo: {{periodo}}</h3>
+        </div>
+        <nz-table nzSize="middle">
+            <thead>
+                <tr class="stiloTr">
+                    <th>Proceso</th>
+                    <th>Fecha de entrega del estudiante</th>
+                    <th>Fecha de sesión de comité</th>
+                    <th>Fecha de entrega de resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of Datos">
+                    <td>{{item.proceso}}</td>
+                    <td>{{item.fechaEntrega | date:'longDate'}}</td>
+                    <td>{{item.fechaSesioncomite | date:'longDate'}}</td>
+                    <td>{{item.fechaResultado | date:'longDate'}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </nz-content>
 </nz-layout>

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { UsersService } from 'src/app/services/users.service';
 
-interface ItemData {
+/*interface ItemData {
   id: string;
   name: string;
   numberId: string;
   nameProject: string;
-}
+}*/
 
 @Component({
   selector: 'app-user',
@@ -15,9 +16,23 @@ interface ItemData {
 })
 export class UserComponent implements OnInit{
 
-  constructor(private modal: NzModalService) {}
+  data: any[] = [];
 
-  editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
+  constructor(public userService: UsersService, private modal: NzModalService) {}
+  ngOnInit(): void {
+    this.llenarData();
+    
+   // this.addRow();
+  }
+
+  llenarData(){
+    this.userService.getUsers().subscribe(data => {
+      this.data = data;
+      console.log("Datos", this.data);
+    })
+  }
+ 
+  /*editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
   listOfData: ItemData[] = [];
   i = 0;
   editId: string | null = null;
@@ -78,8 +93,6 @@ export class UserComponent implements OnInit{
   deleteRow(id: string): void {
     this.listOfData = this.listOfData.filter(d => d.id !== id);
   }
-
-  ngOnInit(): void {
-    this.addRow();
-  }
+*/
+  
 }

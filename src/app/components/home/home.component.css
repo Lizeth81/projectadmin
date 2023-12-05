@@ -1,6 +1,10 @@
 nz-header {
-    background: #ffffff;
-    height: 80px;
+    background: #fff;
+    height: 120px;
+}
+
+nz-breadcrumb {
+    margin: 16px 0;
 }
 
 .from-tittle {
@@ -9,40 +13,20 @@ nz-header {
     text-align: center;
 }
 
-<<<<<<< HEAD
 nz-content {
+    padding-left: 25px;
+    padding-right: 25px;
     background: #fff;
-    min-height: 400px;
-=======
-.from-tittle {
-    font-family: 'Times New Roman', serif;
-    font-weight: bold;
+    border-radius: 15px;
+    box-shadow: 3px 3px #8e94c044;
+}
+
+z-tabled {
     text-align: center;
->>>>>>> 225d08174d40b34268d90a4b13329ddf507bed57
-}
-
-.inner-content {
-    padding: 10px;
     background: #fff;
-    min-height: 460px;
 }
 
-
-nz-header {
-    background: #fff;
-    height: 80px;
+[nz-button] {
+    margin-right: 8px;
+    margin-bottom: 12px;
 }
-
-tr{
-    text-align: center;
-}
-
-z-tabled{
-   text-align: center;
-}
-
-
-
-
-
-

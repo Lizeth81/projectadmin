@@ -6,15 +6,55 @@
     <nz-content>
         <div class="inner-content">
             <br />
-            <!--Buscar Usuario-->
-            <nz-form-control [nzSpan]="25">
-                <nz-select nzShowSearch nzPlaceHolder="Buscar usuario" [(ngModel)]="selectedValue">
-                    <nz-option nzLabel="" nzValue=""></nz-option>
-                </nz-select>
-            </nz-form-control>
-            <br />
+            <nz-table #editRowTable nzBordered nzTableLayout="fixed">
+                <thead>
+                    <tr>
+                        <th nzWidth="6%">N°</th>
+                        <th>Nombre</th>
+                        <th>Codigo</th>
+                        <th>Rol</th>
+                        <th nzWidth="30%">Nombre del proyecto de grado</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of data" class="editable-row">
+                        <ng-container>
+                            <td></td>
+                            <td>{{item.nombre}}</td>
+                            <td>{{ item.codigo}}</td>
+                            <td> {{item.rol }}</td>
+                            <td></td>
+                            <td>{{item.estado }}</td>
+                            <td>
+                                <a><span nz-icon nzType="edit" nzTheme="outline" class="icons"></span></a>
+                                <a nz-popconfirm nzPopconfirmTitle="¿Estas seguro de eliminar el usuario?">
+                                    <span nz-icon nzType="delete" nzTheme="outline" style="color: red;" class="icons"></span>
+                                </a>
+                            </td>
+                        </ng-container>
+                        <ng-template #editTemplate>
+                            <td></td>
+                            <td><input type="text" nz-input /></td>
+                            <td><input type="text" nz-input /></td>
+                            <td><input type="text" nz-input /></td>
+                            <td><a>Anteproyecto</a></td>
+                            <td>
+                                <a class="save">
+                                    <span nz-icon nzType="check-circle" nzTheme="outline" style="color: rgb(102, 255, 0);" class="icons"></span>
+                                </a>
+                                <a nz-popconfirm nzPopconfirmTitle="¿Seguro  desea cancelar?">
+                                    <span nz-icon nzType="close-circle" nzTheme="outline" style="color: red;" class="icons"></span>
+                                </a>
+                            </td>
+                        </ng-template>
+                    </tr>
+                </tbody>
+            </nz-table>
+
             <!--Lista de usuarios-->
-            <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
+            <!-- <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
                 <thead>
                     <tr>
                         <th nzWidth="6%">N°</th>
@@ -28,7 +68,7 @@
                 <tbody>
                     <tr *ngFor="let data of editRowTable.data" class="editable-row">
                         <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
-                            <td>{{ data.id }}</td>
+                            <td>{{item.status}}</td>
                             <td>{{ data.name }}</td>
                             <td> {{ data.numberId }}</td>
                             <td>{{ data.nameProject }}</td>
@@ -57,7 +97,7 @@
                         </ng-template>
                     </tr>
                 </tbody>
-            </nz-table>
+            </nz-table>-->
         </div>
     </nz-content>
 </nz-layout>
