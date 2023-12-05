@@ -23,7 +23,10 @@ import { ConfigComponent } from './components/config/config.component';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 import { SecurityComponent } from './components/security/security.component';
 import { InfoprojectDirectorComponent } from './components/infoproject-director/infoproject-director.component';
-
+import { InfoanteproyectoDirectorComponent } from './components/infoanteproyecto-director/infoanteproyecto-director.component';
+import { InfoanteproyectoJuradoComponent } from './components/infoanteproyecto-jurado/infoanteproyecto-jurado.component';
+import { InfoprojectJuradoComponent } from './components/infoproject-jurado/infoproject-jurado.component';
+import { SustentacionJuradoComponent } from './components/sustentacion-jurado/sustentacion-jurado.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'Login' },
@@ -48,6 +51,10 @@ const routes: Routes = [
         { path: 'proyectoFinalAdmin', component:ProjectfinalAdminComponent},
         { path: 'proyectoFinalJurado', component:ProjectfinalJuradoComponent},
         { path: 'informacionProyectoDirector', component:InfoprojectDirectorComponent},
+        { path: 'informacionanteproyectoDirector', component:InfoanteproyectoDirectorComponent},
+        { path: 'informacionAnteproyectoJurado', component:InfoanteproyectoJuradoComponent},
+        { path: 'informacionProyectoJurado', component:InfoprojectJuradoComponent},
+        { path: 'sustentacionJurado', component:SustentacionJuradoComponent},
         { path: 'Configuration', component:ConfigComponent,
           children: [
             { path: '', pathMatch: 'full', redirectTo: 'PersonalInformation'},

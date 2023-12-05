@@ -36,6 +36,10 @@ import { ProposedgradeAdminComponent } from './components/proposedgrade-admin/pr
 import { AnteproyectoAdminComponent } from './components/anteproyecto-admin/anteproyecto-admin.component';
 import { ProjectfinalAdminComponent } from './components/projectfinal-admin/projectfinal-admin.component';
 import { InfoprojectDirectorComponent } from './components/infoproject-director/infoproject-director.component';
+import { InfoanteproyectoDirectorComponent } from './components/infoanteproyecto-director/infoanteproyecto-director.component';
+import { InfoanteproyectoJuradoComponent } from './components/infoanteproyecto-jurado/infoanteproyecto-jurado.component';
+import { InfoprojectJuradoComponent } from './components/infoproject-jurado/infoproject-jurado.component';
+import { SustentacionJuradoComponent } from './components/sustentacion-jurado/sustentacion-jurado.component';
 
 registerLocaleData(en);
 
@@ -65,7 +69,11 @@ registerLocaleData(en);
     ProposedgradeAdminComponent,
     AnteproyectoAdminComponent,
     ProjectfinalAdminComponent,
-    InfoprojectDirectorComponent
+    InfoprojectDirectorComponent,
+    InfoanteproyectoDirectorComponent,
+    InfoanteproyectoJuradoComponent,
+    InfoprojectJuradoComponent,
+    SustentacionJuradoComponent
   ],
   imports: [
     BrowserModule,

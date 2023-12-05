@@ -37,9 +37,20 @@ p {
     border: 1PX;
 }
 
+.inputd {
+    width: 50px;
+    margin: 0 8px 8px 0;
+  }
 
-.download{
-    text-align: center;
-}
+  .inputd2 {
+    width: 100px;
+    margin: 0 8px 8px 0;
+  }
+
+  .note{
+    align-items: 1600px;
+    justify-content: 1600px;
+    display: flex;
+  }
 
 
