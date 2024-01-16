@@ -20,21 +20,7 @@
                     {{ uploading ? 'Subiendo' : 'Cargar archivo' }}
                   </button>
             </nz-collapse-panel>
-            <!-- PANEL 2 -->
-            <!--  <nz-collapse-panel *ngFor="let panel of panels2" [nzHeader]="panel.name" [nzActive]="panel.active">
-                <H3>Formato INGSIS_TG_CPPG01_Carta de solicud de cordinador: </H3>
-                <nz-upload [(nzFileList)]="fileListCodirector" [nzBeforeUpload]=" AntesCargarCodirector ">
-                    <button nz-button>
-                      <span nz-icon nzType="upload"></span>
-                      Subir archivo
-                    </button>
-                </nz-upload>
-                <button nz-button [nzType]="'primary'" [nzLoading]="uploading2" (click)="SubirArchivoCodirector()" [disabled]="fileListCodirector.length === 0" style="margin-top: 16px">
-                    {{ uploading2 ? 'Subiendo' : 'Cargar archivo' }}
-                  </button>
-            </nz-collapse-panel>-->
-            <!-- PANEL 3 -->
-            <nz-collapse-panel *ngFor="let panel of panels3" [nzHeader]="panel.name" [nzActive]="panel.active">
+            <nz-collapse-panel *ngFor="let panel of panels2" [nzHeader]="panel.name" [nzActive]="panel.active">
                 <form nz-form>
                     <div>
                         <h3 class="from-tittle">PRESENTACIÓN DE PROPUESTA DE GRADO</h3>
@@ -43,49 +29,69 @@
                     <div class="centrar-contenedor">
                         <br />
                         <div class="mat-elevation-z8 centrar-contenedor">
-                            <form class="formulario" nz-form>
+                            <form class="formulario" nz-form [formGroup]="validateForm" (ngSubmit)="enviarDatosProyecto()" method="post">
                                 <!-- titulo del proyecto -->
                                 <nz-form-item>
                                     <nz-form-label class="textarea-fijo" [nzSpan]="6" nzRequired>Titulo del proyecto</nz-form-label>
                                     <nz-form-control [nzSpan]="16" nzHasFeedback nzErrorTip="¡Por favor escribe algo aquí!">
                                         <nz-textarea-count [nzMaxCharacterCount]="2000">
-                                            <textarea formControlName="comment" nz-input rows="2" placeholder="Titulo del proyecto de grado"></textarea>
+                                            <textarea nz-input rows="2" formControlName="titulo" placeholder="Titulo del proyecto de grado"></textarea>
                                         </nz-textarea-count>
                                     </nz-form-control>
                                 </nz-form-item>
-                                <!-- Numero de integrantes -->
+                                <!-- Fecha del proyecto -->
                                 <nz-form-item>
-                                    <nz-form-label [nzSpan]="6" nzRequired>Integrantes</nz-form-label>
-                                    <nz-form-control [nzSpan]="16" nzHasFeedback nzErrorTip="¡Por favor escribe algo aquí!">
-                                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecciona integrantes">
-                                            <nz-option nzLabel="1 integrante" nzValue="1 integrante"></nz-option>
-                                            <nz-option nzLabel="2 integrante" nzValue="2 integrante"></nz-option>
-                                            <nz-option nzLabel="3 integrante" nzValue="3 integrante"></nz-option>
-                                        </nz-select>
-                                    </nz-form-control>
+                                    <nz-form-label class="textarea-fijo" [nzSpan]="6" nzRequired>Fecha del proyecto</nz-form-label>
+                                    <nz-date-picker formControlName="fecha"></nz-date-picker>
                                 </nz-form-item>
+                                <!-- Numero de integrantes -->
+                                <form nz-form method="post">
+                                    <nz-form-item>
+                                        <nz-form-label [nzSpan]="6" nzRequired>Integrante</nz-form-label>
+                                        <nz-form-control [nzSpan]="16" nzHasFeedback>
+                                            <input nz-input class="passenger-input" placeholder="Diligenciar el nombre completo del estudiante" type="text" formControlName="integrante1" />
+                                            <span *ngIf="botonIngresarIntegrante" nz-icon nzType="plus-circle" nzTheme="outline" class="dynamic-button" nzTooltipTitle="Solo se puede agregar maximo 3 integrantes por proyecto" nz-tooltip (click)="AgregarIntegrante($event)"></span>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item *ngIf="integrante2">
+                                        <nz-form-label [nzSpan]="6" nzRequired>Integrante</nz-form-label>
+                                        <nz-form-control [nzSpan]="16" nzHasFeedback>
+                                            <input nz-input class="passenger-input" placeholder="Diligenciar el nombre completo del estudiante" type="text" formControlName="integrante2" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item *ngIf="integrante3">
+                                        <nz-form-label [nzSpan]="6" nzRequired>Integrante</nz-form-label>
+                                        <nz-form-control [nzSpan]="16" nzHasFeedback>
+                                            <input nz-input class="passenger-input" placeholder="Diligenciar el nombre completo del estudiante" type="text" formControlName="integrante3" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </form>
                                 <!-- Linea de investigación -->
                                 <nz-form-item>
                                     <nz-form-label [nzSpan]="6" nzRequired>Linea de investigación</nz-form-label>
                                     <nz-form-control [nzSpan]="16" nzHasFeedback>
-                                        <input nz-input formControlName="email" placeholder="Diligenciar la linea investigación que pertenece" type="text" />
+                                        <input nz-input placeholder="Diligenciar la linea investigación que pertenece" type="text" formControlName="lineaInvestigacion" />
                                     </nz-form-control>
                                 </nz-form-item>
-                                <!-- Linea de investigación -->
+                                <!-- semillero de investigación -->
                                 <nz-form-item>
                                     <nz-form-label [nzSpan]="10" nzRequired>Pertenece a un semillero de investigación</nz-form-label>
                                     <nz-form-control [nzSpan]="16" nzHasFeedback>
-                                        <nz-radio-group>
-                                            <label nz-radio nzValue="A">Si</label>
-                                            <label nz-radio nzValue="B">No</label>
+                                        <nz-radio-group formControlName="radioValue" (ngModelChange)="semillero()">
+                                            <label nz-radio [nzValue]="'A'"> 
+                                                <span>Si</span>
+                                            </label>
+                                            <label nz-radio [nzValue]="'B'">
+                                                 <span>No</span>
+                                            </label>
                                         </nz-radio-group>
                                     </nz-form-control>
                                 </nz-form-item>
-                                <!-- Especificar Linea de investigación -->
-                                <nz-form-item>
+                                <!-- Especificar Linea de investigación *ngIf=" === 'A'" -->
+                                <nz-form-item *ngIf="datasemillero">
                                     <nz-form-label [nzSpan]="6" nzRequired>¿Cuál?</nz-form-label>
                                     <nz-form-control [nzSpan]="16" nzHasFeedback>
-                                        <input nz-input placeholder="Sí la respuesta fui si, ¿A cual semillero pertenece?" type="text" />
+                                        <input nz-input placeholder="Sí la respuesta fui si, ¿A cual semillero pertenece?" type="text" formControlName="semilleroInvestigacion" />
                                     </nz-form-control>
                                 </nz-form-item>
                                 <!-- subir archivo -->
@@ -127,11 +133,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>{{date | date : 'short'}}</td>
-                        <td></td>
+                    <tr *ngFor="let item of dataprueba">
+                        <td>{{item.fecha}}</td>
+                        <td>{{item.titulo}}</td>
                         <td>
-                            <a></a>
+                            <a>{{item.estadoProceso}}</a>
                         </td>
                     </tr>
                 </tbody>

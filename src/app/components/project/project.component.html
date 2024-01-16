@@ -1,0 +1,46 @@
+<nz-layout>
+    <nz-header>
+        <h3 class="from-tittle">PROYECTOS DE INGENIERÍA</h3>
+        <hr>
+    </nz-header>
+    <nz-content>
+        <div class="inner-content">
+            <br />
+            <nz-table #editRowTable nzBordered nzTableLayout="fixed">
+                <thead>
+                    <tr>
+                        <th>Proyecto</th>
+                        <th>Fecha</th>
+                        <th>Integrantes</th>
+                        <th>Proceso</th>
+                        <th>Director</th>
+                        <th>Codirector</th>
+                        <th>Jurados</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of data" class="editable-row">
+                        <ng-container>
+                            <td>{{item.titulo}}</td>
+                            <td>{{item.fecha | date:'longDate'}}</td>
+                            <td>{{item.estudiante}}</td>
+                            <td>{{item.proceso}}</td>
+                            <td>{{item.director}}</td>
+                            <td>{{item.codirecto}}</td>
+                            <td>{{item.jurado}}</td>
+                            <td>{{item.estadoProceso}}</td>
+                            <td>
+                                <a><span nz-icon nzType="edit" nzTheme="outline" class="icons"></span></a>
+                                <a nz-popconfirm nzPopconfirmTitle="¿Estas seguro de eliminar el usuario?">
+                                    <span nz-icon nzType="delete" nzTheme="outline" style="color: red;" class="icons"></span>
+                                </a>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </nz-content>
+</nz-layout>

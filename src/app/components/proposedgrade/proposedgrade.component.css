@@ -47,3 +47,29 @@ nz-content {
     display: flex;
     justify-content: center;
 }
+
+nz-date-picker {
+    margin: 0 8px 12px 0;
+}
+
+nz-select {
+    width: 50%;
+}
+
+.dynamic-button {
+    cursor: pointer;
+    position: relative;
+    top: 4px;
+    font-size: 24px;
+    color: #AEEE2E;
+    transition: all 0.3s;
+}
+
+.dynamic-button:hover {
+    color: #54D7EF;
+}
+
+.passenger-input {
+    width: 80%;
+    margin-right: 8px;
+}

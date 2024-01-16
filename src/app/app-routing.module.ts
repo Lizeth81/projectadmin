@@ -23,6 +23,7 @@ import { FinalworkAdminComponent } from './components/finalwork-admin/finalwork-
 import { FinalworkJuradoComponent } from './components/finalwork-jurado/finalwork-jurado.component';
 import { FinalworkDirectorComponent } from './components/finalwork-director/finalwork-director.component';
 import { InfoProjectDirectorComponent } from './components/info-project-director/info-project-director.component';
+import { ProjectComponent } from './components/project/project.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'Login' },
@@ -43,7 +44,8 @@ const routes: Routes = [
         { path: 'TrabajoFinalJurado', component:FinalworkJuradoComponent},
         { path: 'TrabajoFinalDirector/Codirector', component:FinalworkDirectorComponent}, 
         { path: 'TrabajoFinalAdmin', component:FinalworkAdminComponent}, 
-        { path: 'Sustentacion', component:SustainabilityComponent},    
+        { path: 'Sustentacion', component:SustainabilityComponent}, 
+        { path: 'Proyectos', component:ProjectComponent},    
         { path: 'Users', component:UserComponent},   
         { path: 'CreateUser', component:CreateUserComponent},     
         { path: 'Configuration', component:ConfigComponent,

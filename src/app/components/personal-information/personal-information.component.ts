@@ -1,14 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-interface ItemData {
-  id: string; //Identificado
-  name: string;//Nombre
-  birthdate: string;//Fehca de nacimiento
-  gender: string;//Genero
-  email: string;//Correo electronico
-  phone: string;//Telefono celular
-
-}
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-personal-information',
@@ -17,19 +8,30 @@ interface ItemData {
 })
 export class PersonalInformationComponent implements OnInit{
 
+  users: any = {};
+  usersRol: any[] = [];
+  
+
+  constructor(public userService: UsersService) {}
+
+  //Metodo para mostrar datos del usuario
+  getUserLogged() { 
+    const id = this.userService.getUserLogueId(); 
+    this.userService.getUserLogged(id).subscribe((data) => {  
+      this.users=data;
+      this.usersRol = data.rol;
+      let rol =[];
+      for(let i of this.usersRol){
+        rol.push(i.nombre);
+      } 
+      this.usersRol = rol;
+      });
+  }
   //Metodo de editar
   startEdit(): void {
+    
   }
-  //Metodo de cancelar
-  cancelEdit(): void {
-  }
-  //Metodo de guardar
-  saveEdit(): void {
-  }
-
-  updateEditCache(): void {
-  }
-
   ngOnInit(): void {
+    this.getUserLogged();
   }
 }

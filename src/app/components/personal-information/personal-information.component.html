@@ -3,55 +3,45 @@
     <hr>
     <br>
     <br>
-    <div nz-row>
-        <div nz-col nzSpan="8">Nombre:</div>
-        <div nz-col nzSpan="12">Yecid Javier Pimiento</div>
-        <div nz-col nzSpan="4">
-            <span nz-icon nzType="edit" nzTheme="outline"></span>
+    <div *ngIf="users">
+        <div nz-row>
+            <div nz-col nzSpan="8" class="textoSub">Nombre:</div>
+            <div nz-col nzSpan="12" class="text">{{users.nombre}}</div>
         </div>
-    </div>
-    <br>
-    <hr>
-    <br>
-    <div nz-row>
-        <div nz-col nzSpan="8">Fecha de nacimiento:</div>
-        <div nz-col nzSpan="12">29 de septiembre </div>
-        <div nz-col nzSpan="4">
-            <span nz-icon nzType="edit" nzTheme="outline"></span>
+        <br>
+        <hr>
+        <br>
+        <div nz-row>
+            <div nz-col nzSpan="8" class="textoSub">Código:</div>
+            <div nz-col nzSpan="12" class="text">{{users.codigo}}</div>
         </div>
-    </div>
-    <br>
-    <hr>
-    <br>
-    <div nz-row>
-        <div nz-col nzSpan="8">Genero:</div>
-        <div nz-col nzSpan="12">Masculino </div>
-        <div nz-col nzSpan="4">
-            <span nz-icon nzType="edit" nzTheme="outline"></span>
+        <br>
+        <hr>
+        <br>
+        <div nz-row *ngIf="usersRol">
+            <div nz-col nzSpan="8" class="textoSub">Rol:</div>
+            <div nz-col nzSpan="12" class="text">{{usersRol}}</div>
         </div>
     </div>
 </nz-card>
+
 <nz-card>
     <h2>Informacion de contacto</h2>
     <hr>
     <br>
     <br>
-    <div nz-row>
-        <div nz-col nzSpan="8">Correo electronico:</div>
-        <div nz-col nzSpan="12">YecidPimiento&#64;gmail.com</div>
-        <div nz-col nzSpan="4">
-            <span nz-icon nzType="edit" nzTheme="outline"></span>
+    <div *ngIf="users">
+        <div nz-row>
+            <div nz-col nzSpan="8" class="textoSub">Correo electronico:</div>
+            <div nz-col nzSpan="11" class="text">{{users.correo}}</div>
         </div>
-    </div>
-    <br>
-    <hr>
-    <br>
-    <div nz-row>
-        <div nz-col nzSpan="8">Teléfono:</div>
-        <div nz-col nzSpan="12">3228167881</div>
-        <div nz-col nzSpan="4">
-            <span nz-icon nzType="edit" nzTheme="outline"></span>
+        <br>
+        <hr>
+        <br>
+        <div nz-row>
+            <div nz-col nzSpan="8" class="textoSub">Teléfono:</div>
+            <div nz-col nzSpan="12" class="text">{{users.celular}}</div>
         </div>
+        <br>
     </div>
-    <br>
 </nz-card>

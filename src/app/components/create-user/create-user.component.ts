@@ -1,77 +1,115 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
-  AsyncValidatorFn,
   FormControl,
   FormGroup,
   NonNullableFormBuilder,
-  ValidationErrors,
-  ValidatorFn,
   Validators
 } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { UsersService } from 'src/app/services/users.service'; 
 
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css']
 })
-export class CreateUserComponent {
+export class CreateUserComponent implements OnInit {
+  
   validateForm: FormGroup<{
     userName: FormControl<string>;
+    codigo: FormControl<number>;
+    telefono: FormControl<number>;
     email: FormControl<string>;
     password: FormControl<string>;
-    confirm: FormControl<string>;
-    NameProject: FormControl<string>;
-  }>;
-  
-  selectedValue = null;
-
-  resetForm(e: MouseEvent): void {
-    e.preventDefault();
-    this.validateForm.reset();
-  }
-
-  userNameAsyncValidator: AsyncValidatorFn = (control: AbstractControl) =>
-    new Observable((observer: Observer<ValidationErrors | null>) => {
-      setTimeout(() => {
-        if (control.value === 'JasonWood') {
-          // you have to return `{error: true}` to mark it as an error event
-          observer.next({ error: true, duplicated: true });
-        } else {
-          observer.next(null);
-        }
-        observer.complete();
-      }, 1000);
-    });
-
-  confirmValidator: ValidatorFn = (control: AbstractControl) => {
-    if (!control.value) {
-      return { error: true, required: true };
-    } else if (control.value !== this.validateForm.controls.password.value) {
-      return { confirm: true, error: true };
-    }
-    return {};
-  };
-
-  constructor(private  modalService:NzModalService, private fb: NonNullableFormBuilder) {
-    this.validateForm = this.fb.group({
-      userName: ['', [Validators.required], [this.userNameAsyncValidator]],
+    opcionSeleccionado: FormControl<string>;
+  }> = this.fb.group({
+      userName: ['', [Validators.required]],
+      codigo: [ 0, [Validators.required]],
+      telefono: [0, [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]],
-      confirm: ['', [this.confirmValidator]],
-      NameProject: ['', [Validators.required]]
+      opcionSeleccionado: ['0'],
+  });
+
+  isVisible = false;
+  isOkLoading = false;
+  roles: any[] = [];
+  verSeleccion:String = '';
+
+
+  constructor(
+    public userService: UsersService,
+    private  modal:NzModalService, 
+    private fb: NonNullableFormBuilder) {}
+
+  ngOnInit(): void {
+    this.userService.getDatosRoles().subscribe(data => {
+      console.log(data);
+      let rol =[];
+      for(let i of data){
+        rol.push(i.nombre);
+      } 
+      this.roles = rol;
+      console.log("Roles:", this.roles);
+    })
+  }
+  
+  selectedValue = null;
+//Crear usuario
+ crearUsuario(){
+  const user ={
+    nombre: this.validateForm.value.userName,
+    codigo: this.validateForm.value.codigo,
+    correo: this.validateForm.value.email,
+    celular: this.validateForm.value.telefono,
+    pass: this.validateForm.value.password
+  };
+  this.userService.CrearUser(user).subscribe(data => {
+    if(data.success){       
+      const dataUser = data.data;  
+      console.log("data:",dataUser);              
+          this.userService.setIdUserCreado(dataUser._id);
+          this.isVisible = true;
+          this.obtenerDatosRol();          
+        }else{
+          this.modal.error({
+            nzTitle: '¡Datos invalidos!',
+            nzContent: 'El usuaio no se ha podido crear'
+          });  
+    }
+  })
+ }
+ //Rellenar select con los roles creados en base de datos
+ obtenerDatosRol(): void{ 
+  console.log ("Datos seleccion", this.validateForm.value.opcionSeleccionado);
+  /*this.verSeleccion = this.validateForm.value.opcionSeleccionado;   
+  console.log ("Datos seleccionado del rol", this.verSeleccion);*/
+ }
+//Obtener el rol del usuario creado
+ handleOk(): void {
+   this.isOkLoading = true;   
+   const idUser = this.userService.getIdUserCreado();  
+   setTimeout(() => {
+     this.isVisible = false;
+     this.isOkLoading = false;
+   }, 1000);
+   this.modal.success({
+    nzTitle: 'Registro de usuario',
+    nzContent: '¡Se ha registrado el usaurio con exito!'
     });
   }
-  submitForm(): void {
-    const modal = this.modalService.success({
-      nzTitle: 'Registro de usuario',
-      nzContent: '¡Se ha registrado el usaurio con exito!'
-    });
+  handleCancel(): void {
+    this.isVisible = false;
+  }
 
-    setTimeout(() => modal.destroy(), 2000);
-    console.log('submit', this.validateForm.value);
+ //---------------------------------------------
+  submitForm(): void {
+   this.crearUsuario();
+   this.validateForm.reset();
+  }
+  //Metodo de cancelar y limbiar los campos del registro
+  resetForm(e: MouseEvent): void {
+    e.preventDefault();
     this.validateForm.reset();
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ProyectoService } from 'src/app/services/proyecto.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,16 +12,25 @@ import { Router } from '@angular/router';
 export class SidenavComponent implements OnInit {
 
   users: any = {};
-  usersRol: any = {};
-  inicio:boolean=false;
+  usersRol: any[] = [];
+  usersEstudiante: any[] = [];
+  idUser: String = '';
+  idUserProject: String = '';
+  procesoTrabajo: String = '';
+  propuestaGrado:boolean=false;
+  anteproyecto:boolean=false;
+  trabajoFinal:boolean=false;
+  sustentacion:boolean=false;
   MenuEstudiante:boolean=false;
   MenuJurado:boolean=false;
   MenuDirector:boolean=false;
   MenuAdmin:boolean=false;
   adminUser:boolean=false;
+  project: boolean=false;
 
   constructor(
     public userService: UsersService,
+    public proyecService: ProyectoService,
     private message: NzMessageService, 
     private router: Router) {}
 
@@ -33,23 +43,46 @@ signOut(): void {
   }
 
 getUserLogged() { 
-  const id = this.userService.getUserLogueId(); 
-  this.userService.getUserLogged(id).subscribe((data) => {  
-    this.users=data;
-      this.usersRol = data.rol; 
-      console.log("Rol:", this.users);  
-      if(this.usersRol == 'Estudiante'){
-        this.inicio=true;
-        this.MenuEstudiante=true;
-      } else if(this.usersRol == 'Administrador'){
-        this.inicio=true;
+  this.idUser = this.userService.getUserLogueId(); 
+  this.userService.getUserLogged(this.idUser).subscribe((data) => {  
+    this.users = data;
+    this.usersRol = data.rol;
+    let rol =[];
+    for(let i of this.usersRol){
+      rol.push(i.nombre);
+    } 
+    const roles = rol.toString();
+   if(roles == 'Estudiante'){
+      this.proyecService.proyectos().subscribe(data => {
+        for (let index = 0; index < data.length; index++) {
+          const element = data[index];
+          this.usersEstudiante = element.estudiante;
+          
+          for (let i = 0; i < this.usersEstudiante.length; i++) {
+            this.idUserProject = this.usersEstudiante[i]._id;    
+            if(this.idUser ==  this.idUserProject){
+              this.procesoTrabajo = element.proceso;
+              console.log("Proceso:", this.procesoTrabajo);
+              if(this.procesoTrabajo == "Sustentacion"){
+                this.sustentacion=true;
+              }else if(this.procesoTrabajo == "Anteproyecto"){
+                this.anteproyecto=true;
+              }else if(this.procesoTrabajo == "Trabajofinal"){
+                this.trabajoFinal = true;
+              }else{
+                this.propuestaGrado=true;
+              }
+            }      
+          }        
+        }
+      });         
+      } else if(roles == 'Administrador'){
         this.MenuAdmin=true;
         this.adminUser=true;
-      }else if(this.usersRol == 'Jurado'){
-        this.inicio=true;
+        this.project=true;
+      }else if(roles == 'Jurado'){
         this.MenuJurado=true;
       }else{
-        this.inicio=true;
         this.MenuDirector=true;
       }
     });

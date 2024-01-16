@@ -16,6 +16,26 @@
                     </ng-template>
                 </nz-form-control>
             </nz-form-item>
+            <!--Codigo del usuario-->
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Codigo</nz-form-label>
+                <nz-form-control [nzSpan]="30" nzHasFeedback [nzErrorTip]="emailErrorTpl">
+                    <input nz-input formControlName="codigo" type="number" />
+                    <ng-template #emailErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('required')">¡Por favor ingrese el codigo del usuario!</ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+            <!--Numero telefonico del usuario-->
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Numero telefonico</nz-form-label>
+                <nz-form-control [nzSpan]="30" nzHasFeedback [nzErrorTip]="emailErrorTpl">
+                    <input nz-input formControlName="telefono" type="number" />
+                    <ng-template #emailErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('required')">¡Por favor ingrese el numero de telefono del usuario!</ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
             <!--Correo electronico-->
             <nz-form-item>
                 <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
@@ -36,24 +56,30 @@
             <!--Seleccionar usuario-->
             <nz-form-item>
                 <nz-form-label [nzSpan]="7" nzRequired>Tipo de usuario</nz-form-label>
-                <nz-form-control [nzSpan]="30" nzHasFeedback nzErrorTip="¡Por favor seleccionar un usuario!">
-                    <nz-select nzShowSearch nzAllowClear [(ngModel)]="selectedValue">
-                        <nz-option nzLabel="Estudiante" nzValue="estudiante"></nz-option>
-                        <nz-option nzLabel="Director" nzValue="director"></nz-option>
-                        <nz-option nzLabel="Jurado" nzValue="jurado"></nz-option>
-                        <nz-option nzLabel="Administrador" nzValue="admin"></nz-option>
+                <nz-form-control [nzSpan]="30">
+                    <nz-select nzShowSearch nzAllowClear formControlName="opcionSeleccionado" name="rol" id="rol" (ngModelChange)="obtenerDatosRol()">
+                        <nz-option nzValue="0" nzLabel="Seleccione una opcion"></nz-option>
+                        <nz-option *ngFor="let rol of roles" nzLabel="{{rol}}"></nz-option>
                     </nz-select>
                 </nz-form-control>
             </nz-form-item>
-            <!--Nombre del proyecto-->
-            <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Nombre del proyecto</nz-form-label>
-                <nz-form-control [nzSpan]="30" nzHasFeedback nzErrorTip="¡Por favor ingresar el nombre del proyecto de grado!">
-                    <nz-textarea-count [nzMaxCharacterCount]="2000">
-                        <textarea formControlName="NameProject" nz-input rows="2"></textarea>
-                    </nz-textarea-count>
-                </nz-form-control>
-            </nz-form-item>
+            <!-- <nz-modal [(nzVisible)]="isVisible" nzTitle="Ingresar el rol del usuario" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+                <div *nzModalContent>
+                    <form nz-form>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="7" nzRequired>Tipo de usuario</nz-form-label>
+                            <nz-form-control [nzSpan]="30">
+                                <nz-select nzShowSearch nzAllowClear [(ngModel)]="opcionSeleccionado" name="rol" id="rol" (ngModelChange)="obtenerDatosRol()">
+                                    <nz-option nzValue="0" nzLabel="Seleccione una opcion"></nz-option>
+                                    <nz-option *ngFor="let rol of roles" nzLabel="{{rol}}"></nz-option>
+                                </nz-select>
+                                <p [hidden]="opcionSeleccionado== '0'">Has seleccionado la opcion # {{verSeleccion}}</p>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+            </nz-modal>-->
+            <!--Botones-->
             <nz-form-item>
                 <nz-form-control [nzOffset]="7" [nzSpan]="30">
                     <button nz-button nzType="primary" [disabled]="!validateForm.valid">Registrar Usuario</button>

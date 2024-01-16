@@ -6,15 +6,11 @@
     </div>
 
     <nz-input-group class="buscar" [nzSuffix]="suffixIconSearch">
-        <input type="text" nz-input placeholder="Buscar por titulo del poyecto" />
+        <input type="text" nz-input placeholder="Buscar poyecto" />
     </nz-input-group>
     <ng-template #suffixIconSearch>
         <span nz-icon nzType="search"></span>
     </ng-template>
-
-    <nz-cascader class="filtro" [nzExpandTrigger]="'hover'" [nzOptions]="nzOptions" [(ngModel)]="values" (ngModelChange)="onChanges($event)"></nz-cascader>
-
-
     <br />
 
     <br />

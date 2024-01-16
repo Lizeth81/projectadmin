@@ -23,10 +23,36 @@ nz-content {
 
 z-tabled {
     text-align: center;
-    background: #fff;
+    /* background: #fff;*/
 }
 
 [nz-button] {
     margin-right: 8px;
     margin-bottom: 12px;
+}
+
+.BotonEliminar {
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+}
+
+.encabezadoTabla {
+    background: #8FB1F2;
+}
+
+.btn-text-right {
+    text-align: right;
+    display: inline-block;
+    width: 50%;
+}
+
+.text-left {
+    width: 50%;
+    display: inline-block;
+}
+
+.icons {
+    font-size: 20px;
+    margin-right: 20px;
 }

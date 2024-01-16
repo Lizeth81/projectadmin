@@ -39,6 +39,7 @@ import { InfoProjectDirectorComponent } from './components/info-project-director
 import { ProposedGradeAdminComponent } from './components/proposed-grade-admin/proposed-grade-admin.component';
 import { ProposedGradeDirectorComponent } from './components/proposed-grade-director/proposed-grade-director.component';
 import { ProposedGradeJuradoComponent } from './components/proposed-grade-jurado/proposed-grade-jurado.component';
+import { ProjectComponent } from './components/project/project.component';
 import LocaleEsMx from '@angular/common/locales/es-CO';
 // Servicios
 import { UsersService } from './services/users.service';
@@ -75,7 +76,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     PreliminayProjectAdminComponent,
     PreliminayProjectDirectorComponent,
     PreliminayProjectJuradoComponent,
-    InfoProjectDirectorComponent
+    InfoProjectDirectorComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,

@@ -2,13 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { UsersService } from 'src/app/services/users.service';
 
-/*interface ItemData {
-  id: string;
-  name: string;
-  numberId: string;
-  nameProject: string;
-}*/
-
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -17,82 +10,47 @@ import { UsersService } from 'src/app/services/users.service';
 export class UserComponent implements OnInit{
 
   data: any[] = [];
+  user: any[] = [];
+  usersRol: any[] = [];
+  rolUser: string ='';
+  i: number = 0;
 
   constructor(public userService: UsersService, private modal: NzModalService) {}
-  ngOnInit(): void {
-    this.llenarData();
-    
-   // this.addRow();
-  }
-
-  llenarData(){
-    this.userService.getUsers().subscribe(data => {
-      this.data = data;
-      console.log("Datos", this.data);
-    })
-  }
- 
-  /*editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
-  listOfData: ItemData[] = [];
-  i = 0;
-  editId: string | null = null;
-  selectedValue = null;
-
-  startEdit(id: string): void {
-    //this.editId = id;
-    this.editCache[id].edit = true;
-  }
-  stopEdit(): void {
-    this.editId = null;
-  }
-  cancelEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
-    this.editCache[id] = {
-      data: { ...this.listOfData[index] },
-      edit: false
-    };
-  }
-  saveEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
-    Object.assign(this.listOfData[index], this.editCache[id].data);
-    this.editCache[id].edit = false;
-      this.modal.success({
-        nzTitle: 'Datos editados correctamente',
-        nzContent: 'Se guardo con exito los datos registrados.'
-      });
-  }
-
-  updateEditCache(): void {
-    this.listOfData.forEach(item => {
-      this.editCache[item.id] = {
-        edit: false,
-        data: { ...item }
-      };
-    });
-  }
-
-  addRow(): void {
-    this.listOfData = [
-      {
-        id: `${this.i}`,
-        name: `Natalia Sanchez`,
-        numberId: '9010521358',
-        nameProject: `Administración de proyecto de grado del area de Ingeniería de sistemas`,
-      },
-      {
-        id: `${this.i+1}`,
-        name: `Yecid Pimiento`,
-        numberId: '9010521478',
-        nameProject: `Administración de proyecto de grado del area de Ingeniería de sistemas`
-     }      
-    ];
-    this.i++;
-    this.updateEditCache();
-  }
-
-  deleteRow(id: string): void {
-    this.listOfData = this.listOfData.filter(d => d.id !== id);
-  }
-*/
   
+  ngOnInit(): void {
+    this.llenarDataTabla();
+  }
+
+  llenarDataTabla(){
+    this.userService.getUsers().subscribe(data => {
+      this.data = data; 
+      
+       for (let index = 0; index <= this.data.length; index++) {  
+        this.user = data[index]; 
+        console.log("user", this.user);
+       /* this.userService.getUserLogged(this.userId).subscribe((data) => { 
+          this.usersRol = data.rol; 
+          console.log("rol", this.usersRol)       
+          });*/
+       }
+      
+    });
+    
+   /* for (let index = 0; index <= this.data.length; index++) {       
+      this.userId = this.data[index].id;  //Id del usuario
+      console.log("id", this.userId);
+      this.userService.getUserLogged(this.userId).subscribe((data) => { 
+       this.usersRol = data.rol;        
+       });
+     } 
+      
+      let rol =[];
+         for(let i of this.usersRol){
+           rol.push(i.nombre);
+           this.rolUser = rol.toString();
+         }
+       
+    this.i++;*/
+  } 
+
 }

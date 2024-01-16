@@ -10,11 +10,11 @@
                 <thead>
                     <tr>
                         <th nzWidth="6%">N°</th>
-                        <th>Nombre</th>
-                        <th>Codigo</th>
-                        <th>Rol</th>
-                        <th nzWidth="30%">Nombre del proyecto de grado</th>
-                        <th>Estado</th>
+                        <th>Nombre del usuario</th>
+                        <th>Código del usuario</th>
+                        <th>Rol del usuario</th>
+                        <th>Correo electronico</th>
+                        <th>Telefono</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -23,10 +23,10 @@
                         <ng-container>
                             <td></td>
                             <td>{{item.nombre}}</td>
-                            <td>{{ item.codigo}}</td>
-                            <td> {{item.rol }}</td>
-                            <td></td>
-                            <td>{{item.estado }}</td>
+                            <td>{{item.codigo}}</td>
+                            <td> {{item.rol}}</td>
+                            <td>{{item.correo}}</td>
+                            <td>{{item.celular}}</td>
                             <td>
                                 <a><span nz-icon nzType="edit" nzTheme="outline" class="icons"></span></a>
                                 <a nz-popconfirm nzPopconfirmTitle="¿Estas seguro de eliminar el usuario?">

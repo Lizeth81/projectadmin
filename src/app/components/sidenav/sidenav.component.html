@@ -13,17 +13,21 @@
         </div>-->
         <!--MENU-->
         <ul nz-menu nzTheme="dark" nzMode="inline">
-            <li nz-menu-item routerLink="Home" routerLinkActive="active" *ngIf="inicio">
+            <li nz-menu-item routerLink="Home" routerLinkActive="active">
                 <span nz-icon nzType="home" nzTheme="outline"></span>
                 <span>Inicio</span>
             </li>
+            <!-- <li nz-menu-item routerLink="PropuestaGrado" routerLinkActive="active">
+                <span nz-icon nzType="snippets" nzTheme="outline"></span>
+                <span>Propuesta de Grado</span>
+            </li>-->
             <li nz-submenu nzTitle="Trabajo de grado" nzIcon="file">
                 <!--Menu de proyecto de grado estudante-->
-                <ul *ngIf="MenuEstudiante">
-                    <li nz-menu-item routerLink="PropuestaGrado" routerLinkActive="active">Propuesta de Grado</li>
-                    <li nz-menu-item routerLink="Anteproyecto" routerLinkActive="active">Anteproyecto</li>
-                    <li nz-menu-item routerLink="TrabajoFinal" routerLinkActive="active">Trabajo Final</li>
-                    <li nz-menu-item routerLink="Sustentacion" routerLinkActive="active">Sustentación</li>
+                <ul>
+                    <li nz-menu-item routerLink="PropuestaGrado" routerLinkActive="active" *ngIf="propuestaGrado">Propuesta de Grado</li>
+                    <li nz-menu-item routerLink="Anteproyecto" routerLinkActive="active" *ngIf="anteproyecto">Anteproyecto</li>
+                    <li nz-menu-item routerLink="TrabajoFinal" routerLinkActive="active" *ngIf="trabajoFinal">Trabajo Final</li>
+                    <li nz-menu-item routerLink="Sustentacion" routerLinkActive="active" *ngIf="sustentacion">Sustentación</li>
                 </ul>
                 <!--Menu de proyecto de grado juez-->
                 <ul *ngIf="MenuJurado">
@@ -44,7 +48,11 @@
                     <li nz-menu-item routerLink="TrabajoFinalAdmin" routerLinkActive="active">Proyecto Final</li>
                 </ul>
             </li>
-            <li nz-submenu nzTitle="Administar usuarios" nzIcon="team" *ngIf="adminUser">
+            <li nz-menu-item routerLink="Proyectos" routerLinkActive="active" *ngIf="project">
+                <span nz-icon nzType="snippets" nzTheme="outline"></span>
+                <span>Proyectos</span>
+            </li>
+            <li nz-submenu nzTitle="Admin usuarios" nzIcon="team" *ngIf="adminUser">
                 <ul>
                     <li nz-menu-item routerLink="Users" routerLinkActive="active">Usuarios</li>
                     <li nz-menu-item routerLink="CreateUser" routerLinkActive="active">Crear usuario</li>
