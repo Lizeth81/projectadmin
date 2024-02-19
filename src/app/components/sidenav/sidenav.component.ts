@@ -17,6 +17,7 @@ export class SidenavComponent implements OnInit {
   idUser: String = '';
   idUserProject: String = '';
   procesoTrabajo: String = '';
+  idProject: String = '';
   propuestaGrado:boolean=false;
   anteproyecto:boolean=false;
   trabajoFinal:boolean=false;
@@ -37,6 +38,7 @@ export class SidenavComponent implements OnInit {
 /**Cerrar sesión*/
 isVisible = false;
 isConfirmLoading = false;
+isVisibleModal: boolean = false;
 
 signOut(): void {
     this.isVisible = true;
@@ -62,7 +64,9 @@ getUserLogged() {
             this.idUserProject = this.usersEstudiante[i]._id;    
             if(this.idUser ==  this.idUserProject){
               this.procesoTrabajo = element.proceso;
-              console.log("Proceso:", this.procesoTrabajo);
+              this.idProject = element._id;
+              this.proyecService.setIdProyecto(this.idProject);
+              this.proyecService.setProceso(this.procesoTrabajo);
               if(this.procesoTrabajo == "Sustentacion"){
                 this.sustentacion=true;
               }else if(this.procesoTrabajo == "Anteproyecto"){
@@ -100,10 +104,21 @@ logout(): void {
     this.router.navigateByUrl("/Login");
  }
 
+ handleOk(): void {
+  console.log('Button ok clicked!');
+  this.isVisibleModal = false;
+}
+
 handleCancel(): void {
-  this.isVisible = false;
+  console.log('Button cancel clicked!');
+  this.isVisibleModal = false;
 }
 ngOnInit(): void {
   this.getUserLogged();
 }
+
+showModal() {
+  this.isVisibleModal = true;
+}
+
 }

@@ -160,6 +160,13 @@ export class HomeComponent implements OnInit {
       console.log("RolUser", roles);  
       if(roles == 'Administrador'){
         this.verBotonesActualizar=true;
+        for (let index = 0; index < this.datosProcesos.length; index++) {
+          if(index < 3){
+            this.verBotonesAgg=true;
+          }else{
+            this.verBotonesAgg=false;
+          }
+        }
       } 
     });
     }
@@ -172,16 +179,15 @@ export class HomeComponent implements OnInit {
        const id = this.calendarService.getCalendarioId();
         this.calendarService.getProcesos(id).subscribe(data => {
           this.datosProcesos = data;
-          for (let index = 0; index < data.length; index++) {
+          /*for (let index = 0; index < data.length; index++) {
             if(index < 3){
               this.verBotonesAgg=true;
             }else{
               this.verBotonesAgg=false;
             }
-          }
+          }*/
           }); 
       }); 
-      return this.datosProcesos;
     }
 
   //Metodos del modal

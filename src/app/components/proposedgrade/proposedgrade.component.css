@@ -73,3 +73,7 @@ nz-select {
     width: 80%;
     margin-right: 8px;
 }
+
+.dynamic-delete-button:hover {
+    color: #777;
+}

@@ -19,17 +19,47 @@
             <tr>
                 <th class="proyecto">Titulo del proyecto</th>
                 <th>Estado</th>
+                <th>Acción</th>
 
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of editRowTable.data" class="editable-row">
 
-                <td>
-                    <a>Desarrollar ua aplicación web para la gestión de los trabajos
-                de grado de la Universidad de Santander, udes campus Cúcuta</a>
-                </td>
-                <td>Aprobado</td>
+            <tr class="editable-row" *ngFor="let project of projects; let i = index">
+                <ng-container>
+                    <td>
+                        <p>{{ project.titulo }}</p>
+                    </td>
+                    <td>{{ project.estadoProceso }}</td>
+
+                    <td>
+                        <button nz-button [nzType]="'primary'" (click)="showModal(project._id)"><span>Estado</span></button>
+                        <nz-modal [(nzVisible)]="isVisible" [nzTitle]="projectId?.titulo" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+                            <ng-container *nzModalContent>
+                                <div>
+                                    <legend>Estado</legend>
+                                    <label *ngFor="let estado of ['Aprobado', 'Pendiente', 'Rechazado']">
+                                        <input type="radio" 
+                                               name="estado"
+                                               [value]="estado"
+                                               [checked]="projectId?.estadoProceso === estado"
+                                               (change)="onCheckboxChange($event, estado, projectId?._id)">
+                                        {{ estado }}
+                                    </label>
+                                    <legend>Proceso</legend>
+                                    <label *ngFor="let estadoProyecto of ['Propuesta de grado', 'Anteproyecto', 'Sustentacion', 'Proyecto Final']">
+                                        <input type="radio" 
+                                               name="estadoProyecto"
+                                               [value]="estadoProyecto"
+                                               [checked]="projectId?.proceso === estadoProyecto"
+                                               (change)="onCheckboxChangeProceso($event, estadoProyecto, projectId?._id)">
+                                        {{ estadoProyecto }}
+                                    </label>
+                                </div>
+                            </ng-container>
+                        </nz-modal>
+                    </td>
+                </ng-container>
             </tr>
         </tbody>
     </nz-table>

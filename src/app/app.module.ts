@@ -44,6 +44,7 @@ import LocaleEsMx from '@angular/common/locales/es-CO';
 // Servicios
 import { UsersService } from './services/users.service';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor'
+import { SustainabilityJuradoComponent } from './components/sustainability-jurado/sustainabilityJurado.component';
 registerLocaleData(LocaleEsMx);
 
 const antDesignIcons = AllIcons as {
@@ -77,7 +78,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     PreliminayProjectDirectorComponent,
     PreliminayProjectJuradoComponent,
     InfoProjectDirectorComponent,
-    ProjectComponent
+    ProjectComponent,
+    SustainabilityJuradoComponent,
   ],
   imports: [
     BrowserModule,

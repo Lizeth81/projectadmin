@@ -13,6 +13,7 @@ import { PreliminayProjectDirectorComponent } from './components/preliminay-proj
 import { PreliminayProjectJuradoComponent } from './components/preliminay-project-jurado/preliminay-project-jurado.component';
 import { FinalWorkComponent } from './components/final-work/final-work.component';
 import { SustainabilityComponent } from './components/sustainability/sustainability.component';
+import { SustainabilityJuradoComponent } from './components/sustainability-jurado/sustainabilityJurado.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { ConfigComponent } from './components/config/config.component';
@@ -45,6 +46,7 @@ const routes: Routes = [
         { path: 'TrabajoFinalDirector/Codirector', component:FinalworkDirectorComponent}, 
         { path: 'TrabajoFinalAdmin', component:FinalworkAdminComponent}, 
         { path: 'Sustentacion', component:SustainabilityComponent}, 
+        { path: 'SustentacionJurado', component:SustainabilityJuradoComponent}, 
         { path: 'Proyectos', component:ProjectComponent},    
         { path: 'Users', component:UserComponent},   
         { path: 'CreateUser', component:CreateUserComponent},     

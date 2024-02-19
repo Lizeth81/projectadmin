@@ -22,18 +22,26 @@
                 <span>Propuesta de Grado</span>
             </li>-->
             <li nz-submenu nzTitle="Trabajo de grado" nzIcon="file">
-                <!--Menu de proyecto de grado estudante-->
+                <!--Menu de proyecto sde grado etudiante-->
                 <ul>
                     <li nz-menu-item routerLink="PropuestaGrado" routerLinkActive="active" *ngIf="propuestaGrado">Propuesta de Grado</li>
                     <li nz-menu-item routerLink="Anteproyecto" routerLinkActive="active" *ngIf="anteproyecto">Anteproyecto</li>
-                    <li nz-menu-item routerLink="TrabajoFinal" routerLinkActive="active" *ngIf="trabajoFinal">Trabajo Final</li>
                     <li nz-menu-item routerLink="Sustentacion" routerLinkActive="active" *ngIf="sustentacion">Sustentación</li>
+                    <li nz-menu-item routerLink="TrabajoFinal" routerLinkActive="active" *ngIf="trabajoFinal">Trabajo Final</li>
+                    <li nz-menu-item nz-button (click)="showModal()">Nota Final</li>
+
+                    <nz-modal [(nzVisible)]="isVisibleModal" nzTitle="NOTA FINAL" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+                        <ng-container *nzModalContent>
+                            <div>
+                                <p>Mi nota es: 3.6 Aprobado</p>
+                            </div>
+                        </ng-container>
+                    </nz-modal>
                 </ul>
                 <!--Menu de proyecto de grado juez-->
                 <ul *ngIf="MenuJurado">
-                    <li nz-menu-item routerLink="PropuestaGradoJurado" routerLinkActive="active">Propuesta de grado</li>
-                    <li nz-menu-item routerLink="AnteproyectoJurado" routerLinkActive="active">Anteproyecto</li>
-                    <li nz-menu-item routerLink="TrabajoFinalJurado" routerLinkActive="active">Proyecto Final</li>
+                    <li nz-menu-item routerLink="PropuestaGradoJurado" routerLinkActive="active">Proyectos</li>
+                    <li nz-menu-item routerLink="SustentacionJurado" routerLinkActive="active">Sustentacion</li>
                 </ul>
                 <!--Menu de proyecto de grado director/Codirector-->
                 <ul *ngIf="MenuDirector">
@@ -43,9 +51,9 @@
                 </ul>
                 <!--Menu de proyecto de grado Admin-->
                 <ul *ngIf="MenuAdmin">
-                    <li nz-menu-item routerLink="PropuestaGradoAdmin" routerLinkActive="active">Propuesta de grado</li>
-                    <li nz-menu-item routerLink="AnteproyectoAdmin" routerLinkActive="active">Anteproyecto</li>
-                    <li nz-menu-item routerLink="TrabajoFinalAdmin" routerLinkActive="active">Proyecto Final</li>
+                    <li nz-menu-item routerLink="PropuestaGradoAdmin" routerLinkActive="active">Proyectos</li>
+                    <!-- <li nz-menu-item routerLink="AnteproyectoAdmin" routerLinkActive="active">Anteproyecto</li>
+                    <li nz-menu-item routerLink="TrabajoFinalAdmin" routerLinkActive="active">Proyecto Final</li> -->
                 </ul>
             </li>
             <li nz-menu-item routerLink="Proyectos" routerLinkActive="active" *ngIf="project">

@@ -41,27 +41,31 @@ export class ProposedgradeComponent implements OnInit {
 
   datasemillero:boolean=false;
   SolicitudPropuesta:boolean =true;
+  propuestaGrado:Boolean = true;
+  infoPropuestaGrado:Boolean= false;
   TablaEstado:Boolean= false;
   integrante2:boolean = false;
   integrante3:boolean= false;
   botonIngresarIntegrante:boolean = true;
   dataprueba: any[] = [];
+  datoProyecto: any = {};
+  idproject:string='';
+  private fileTmp:any;
+  private dataProject:any;
 
-
+  proceso:string='';
 
     //Paneles
     panels1 = [
       {
         active: false,
-        disabled: false,
         name: 'Solicitud Dirección y/o Codirección Propuestad de Grado',
       }
     ];
     panels2 = [
       {
         active: false,
-        disabled: false,
-        name: 'Presentación del Proyector de grado',
+        name: 'Presentación Propuesta Proyecto de Grado',
       }
     ];
   
@@ -69,31 +73,94 @@ export class ProposedgradeComponent implements OnInit {
       private http: HttpClient, 
       private msg: NzMessageService,
       private proyectoService: ProyectoService,
-      private fb: NonNullableFormBuilder,) {
-       
-      }
+      private fb: NonNullableFormBuilder,) {}
+
+  uploading = false;
+  fileList: NzUploadFile[] = [];
 
   ngOnInit(): void {
-    
+   this.proceso = this.proyectoService.getProceso();
+    this.idproject=this.proyectoService.getIdProyecto();
+    console.log("idproject", this.idproject);
+   if(this.proceso == 'Propuesta de grado'){
+  /* this.propuestaGrado=false;
+    this.infoPropuestaGrado=true;*/
+    this.SolicitudPropuesta=false;
+    this.TablaEstado = true;
+    this.proyectoService.datoProyecto(this.idproject).subscribe(data=>{
+      this.datoProyecto = data;
+    }); 
+   }else if(this.proceso == ''){
+    //this.propuestaGrado=true;
+   }
   }
+    //------------------Cargar proyecto------------------------------
+     //captcha Icono de información sobre herramientas( solo puede agg 3 integrantes)
+     AgregarIntegrante(e?: MouseEvent): void {
+        if(!this.integrante2){
+          this.integrante2 = true;
+          e?.preventDefault();
+        }else{
+          this.integrante3 = true;
+          this.botonIngresarIntegrante=false;
+        }
+     } 
+    //Semillero de investigacion
+    semillero(){      
+      if(this.validateForm.value.radioValue === 'A'){
+        this.datasemillero=true;
+      }else if(this.validateForm.value.radioValue === 'B'){
+        this.datasemillero=false;
+      }
+    }
+    //subir archivo del formulario del trabajo de grado
+    getfile($event: any):void{
+    const [ file ] = $event.target.files;
+      this.fileTmp = {
+        fileRaw:file
+      }
+    }
+    //Guardar Datos del proyecto
+    enviarDatosProyecto(){
+     this.dataProject = {
+        titulo: this.validateForm.value.titulo,
+        fecha: this.validateForm.value.fecha,
+        proceso: 'Propuesta de grado',
+        lineaInvestigacion: this.validateForm.value.lineaInvestigacion,
+        semilleroInvestigacion: this.validateForm.value.semilleroInvestigacion,
+        estadoProceso: 'Pendiente'        
+      };   
+      const formData = new FormData();
+      formData.append('nombreDocumento', this.fileTmp.fileRaw);
+      formData.append('titulo', this.dataProject.titulo);  
+      formData.append('fecha', this.dataProject.fecha);
+      formData.append('proceso', this.dataProject.proceso);
+      //formData.append('lineaInvestigacion', this.dataProject.lineaInvestigacion);
+      //formData.append('semilleroInvestigacion', this.dataProject.semilleroInvestigacion);
+      formData.append('estadoProceso', this.dataProject.estadoProceso);
+      this.proyectoService.guardarProyecto(formData).subscribe( data => {
+        console.log(data);
+       if(data.success){
+          this.msg.success('Datos cargados con exito');
+          this.SolicitudPropuesta=false;
+          this.TablaEstado = true;
+        } else{
+          this.msg.error('Datos no enviados');
+        } 
+      }); 
+    }
 
-    //contenido del panel 1
-    uploading = false;
-    fileListDirector: NzUploadFile[] = [];
-    
-    ///Subir archivo Director y/o cordinador
-    AntesCargarDirector = (file: NzUploadFile): boolean => {
-      this.fileListDirector = this.fileListDirector.concat(file);
+    //--------------Cargar solicitud del director---------------------------------
+    beforeUpload = (file: NzUploadFile): boolean => {
+      this.fileList = this.fileList.concat(file);
       return false;
     };
   
-    SubirArchivoDirector(): void {
+    handleUpload(): void {
       const formData = new FormData();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.fileListDirector.forEach((file: any) => {
+      this.fileList.forEach((file: any) => {
         formData.append('files[]', file);
-
-        
       });
       this.uploading = true;
       // You can use any AJAX library you like
@@ -106,77 +173,24 @@ export class ProposedgradeComponent implements OnInit {
         .subscribe(
           () => {
             this.uploading = false;
-            this.fileListDirector = [];
-            this.msg.success('subir exitosamente.');
+            this.fileList = [];
+            this.msg.success('subido con exito.');
           },
           () => {
             this.uploading = false;
+            this.msg.success('subido con exito.');
             //this.msg.error('upload failed.');
-            this.msg.success('subir exitosamente.');
           }
         );
     }
 
-     //captcha Icono de información sobre herramientas( solo puede agg 3 integrantes)
-     AgregarIntegrante(e?: MouseEvent): void {
-        if(!this.integrante2){
-          this.integrante2 = true;
-          e?.preventDefault();
-        }else{
-          this.integrante3 = true;
-          this.botonIngresarIntegrante=false;
-        }
-     }
-   
-    //subir archivo del formulario del trabajo de grado
-     handleChange(info: NzUploadChangeParam): void {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        this.msg.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        this.msg.error(`${info.file.name} file upload failed.`);
-      }
-    }
-    //Semillero de investigacion
-    semillero(){      
-      if(this.validateForm.value.radioValue === 'A'){
-        console.log("Radio: ", this.validateForm.value.radioValue);
-        this.datasemillero=true;
-      }else if(this.validateForm.value.radioValue === 'B'){
-        this.datasemillero=false;
-      }
-    }
-    //Guardar Datos del proyecto
-    enviarDatosProyecto(){
-     const dataProject = {
-        titulo: this.validateForm.value.titulo,
-        fecha: this.validateForm.value.fecha,
-        proceso: 'Propuesta de grado',
-        lineaInvestigacion: this.validateForm.value.lineaInvestigacion,
-        semilleroInvestigacion: this.validateForm.value.semilleroInvestigacion,
-        estadoProceso: 'Pendiente'
-      };
-      console.log("datos del proyecto:", dataProject);
-      this.proyectoService.guardarProyecto(dataProject).subscribe(data => { 
-        this.dataprueba = data; 
-        if(data.success){
-          this.msg.success('Datos cargados con exito');
-          this.SolicitudPropuesta=false;
-          this.TablaEstado = true;
-        } else{
-          this.msg.error('Datos errados');
-        }          
-         console.log("Datos del proyecto:", data);
-        });
-    }
 
+      SubirArchivoDirector(): void {
+     
+      }
    
 //Botones
-    GuardarTrabajo(){
-   
-    }
+    
     Cancelar(){
       this.msg.warning('Cancelar formulario');
     }
