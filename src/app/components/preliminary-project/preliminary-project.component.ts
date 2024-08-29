@@ -44,6 +44,7 @@ export class PreliminaryProjectComponent {
     fileList: NzUploadFile[] = [];
   
     constructor(private http: HttpClient, private msg: NzMessageService) {}
+
   
     ///Subir archivo Director y/o cordinador
     AntesCargarDirector = (file: NzUploadFile): boolean => {
@@ -101,12 +102,17 @@ export class PreliminaryProjectComponent {
   project = {
     nameProject: '',
   }
+
     /*Fecha*/
     date = new Date();
     fecha = this.date;
     /*Nombre del proyecto*/
 
-  
+    allFilesUploaded(): boolean {
+      // Verifica si todos los archivos requeridos están en fileList
+      // Suponiendo que tienes 3 archivos necesarios
+      return this.fileList.length === 3;
+    }
 
  
 }

@@ -42,33 +42,27 @@
                         <nz-modal [(nzVisible)]="isVisible" [nzTitle]="projectId?.titulo" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
                             <ng-container *nzModalContent>
                                 <div>
-                                    <legend>Ingresar nota</legend>
-                                    <nz-input-number [nzSize]="'large'" [nzMin]="1.0" [nzMax]="5.0" [nzStep]="1.0" [(ngModel)]="demoValue" name="demoValue"></nz-input-number>
-                                    <br>
-                                    <br>
-                                    <textarea nz-input placeholder=" Realizar comentario " [nzAutosize]="{ minRows: 3, maxRows: 5 } "></textarea>
-                                </div>
-
-                                <!--<div>
-                                    <legend>Estado</legend>
-                                    <label *ngFor="let estado of [ 'Aprobado', 'Pendiente', 'Rechazado'] ">
-                                        <input type="radio " 
-                                               name="estado "
-                                               [value]="estado "
-                                               [checked]="projectId?.estadoProceso===e stado "
-                                               (change)="onCheckboxChange($event, estado, projectId?._id) ">
-                                        {{ estado }}
-                                    </label>
-                                    <legend>Proceso</legend>
-                                    <label *ngFor="let estadoProyecto of [ 'Propuesta de grado', 'Anteproyecto', 'Sustentacion', 'Proyecto Final'] ">
-                                        <input type="radio " 
-                                               name="estadoProyecto "
-                                               [value]="estadoProyecto "
-                                               [checked]="projectId?.proceso===e stadoProyecto "
-                                               (change)="onCheckboxChangeProceso($event, estadoProyecto, projectId?._id) ">
+                                    <legend>Seleccionar Proceso</legend>
+                                    <label *ngFor="let estadoProyecto of ['Propuesta de grado', 'Anteproyecto', 'Proyecto Final', 'Sustentacion']">
+                                        <input type="radio"
+                                               name="estadoProyecto"
+                                               [value]="estadoProyecto"
+                                               [(ngModel)]="selectedProcess"
+                                               (change)="onProcessChange(estadoProyecto)">
                                         {{ estadoProyecto }}
                                     </label>
-                                </div>-->
+                                    <br><br>
+
+                                    <div style="text-align: center;" *ngIf="selectedProcess === 'Propuesta de grado' || selectedProcess === 'Anteproyecto' || selectedProcess === 'Proyecto Final' || selectedProcess === 'Sustentacion'">
+                                        <legend>Ingresar Nota</legend>
+                                        <nz-input-number [nzSize]="'large'" [nzMin]="1.0" [nzMax]="5.0" [nzStep]="0.1" [(ngModel)]="demoValue" name="demoValue"></nz-input-number>
+                                      </div>
+                                      
+                                    
+                                    <br>
+                                    <textarea nz-input placeholder="Realizar comentario" [(ngModel)]="comentario" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+
+                                </div>
                             </ng-container>
                         </nz-modal>
                     </td>

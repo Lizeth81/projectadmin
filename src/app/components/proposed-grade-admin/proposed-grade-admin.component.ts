@@ -22,6 +22,7 @@ export class ProposedGradeAdminComponent {
   checked = true;
   projects: any;
   projectId: any;
+  selectedProcess: string = '';
   //value?: string;
   constructor( public projectService: ProyectoService, private  modal:NzModalService, )
   {}
@@ -103,8 +104,8 @@ export class ProposedGradeAdminComponent {
       console.log("resultado", data);
         if (data.success) {
           this.modal.success({
-            nzTitle: '¡Registro con exito!',
-            nzContent: 'El usuaio se ha creado con exito'
+            nzTitle: '¡Proceso Actualizado!',
+            nzContent: 'El proceso se ha actualizado con exito'
           });
           this.llenardatos();
         }
@@ -147,6 +148,23 @@ export class ProposedGradeAdminComponent {
     } else {
       console.log('Desmarcado')
     }
+  }
+
+  onProcessChange(proceso: string): void {
+    this.selectedProcess = proceso; // Actualiza el proceso seleccionado
+  
+    // Actualizar el proceso en la base de datos inmediatamente
+    const data = {
+      proceso: this.selectedProcess
+    };
+  
+    this.projectService.actualizarEstado(this.idproject, data).subscribe(response => {
+      if (response.success) {
+        console.log('Proceso actualizado en la base de datos!');
+      } else {
+        console.error('Error al actualizar el proceso');
+      }
+    });
   }
 
   downloadFile(id: string): void {
