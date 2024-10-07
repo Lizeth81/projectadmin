@@ -18,6 +18,11 @@ export class CalendarService{
   getCalendar(): Observable<any>{
     return this.http.get<any>(this.url+"/datosCalendario");
   }
+
+  //Métodos Mostrar datos de la tabla calendario
+  getCalendarActivo(): Observable<any>{
+    return this.http.get<any>(this.url+"/calendarioActivo");
+  }
   //Método para mostrar los procesos activos del calendario
   getProcesos(idCale: any): Observable<any>{
     return this.http.get<any>(this.url+"/datosProcesos/"+idCale);
@@ -27,9 +32,9 @@ export class CalendarService{
 
     //----------------Calendario (Procesos de año y periodo)--------------
   //Método para actualizar el año y el periodo
-  putCalendarioPeriodoYear(data: any): Observable<any>{
-    const idCale = this.getCalendarioId();
-    return this.http.put<any>(this.url+"/actualizarCalendario/"+idCale, data);
+  putCalendario(id: any, data: any): Observable<any>{
+    console.log('Enviando datos para actualizar:', data);
+    return this.http.put<any>(this.url+"/actualizarCalendario/"+id, data);
   }
     //Métodos guardar el id del calendario
     setCalendarioId(datos: any){

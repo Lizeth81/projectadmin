@@ -44,26 +44,32 @@
                                 </nz-form-item>
                                 <!-- Numero de integrantes -->
                                 <nz-form-item>
-                                    <nz-form-label [nzSpan]="6" nzRequired>Integrante</nz-form-label>
+                                    <nz-form-label [nzSpan]="6" nzRequired>Integrante 1</nz-form-label>
                                     <nz-form-control [nzSpan]="16" nzHasFeedback>
-                                        <input nz-input class="passenger-input" type="text" formControlName="integrante1" value="{{this.Userintegrante1}}" />
-                                        <span *ngIf="botonIngresarIntegrante" nz-icon nzType="plus-circle" nzTheme="outline" class="dynamic-button" nzTooltipTitle="Solo se puede agregar maximo 3 integrantes por proyecto" nz-tooltip (click)="AgregarIntegrante($event)"></span>
+                                      <nz-select formControlName="integrante1" placeholder="Selecciona un integrante">
+                                        <nz-option *ngFor="let integrante of dataUsers" [nzValue]="integrante._id" [nzLabel]="integrante.nombre"></nz-option>
+                                      </nz-select>
+                                      <span *ngIf="botonIngresarIntegrante" nz-icon nzType="plus-circle" nzTheme="outline" class="dynamic-button" nzTooltipTitle="Solo se puede agregar maximo 3 integrantes por proyecto" nz-tooltip (click)="AgregarIntegrante($event)"></span>
                                     </nz-form-control>
-                                </nz-form-item>
-                                <nz-form-item *ngIf="integrante2">
-                                    <nz-form-label [nzSpan]="6" nzRequired>Integrante</nz-form-label>
+                                  </nz-form-item>
+                                  
+                                  <nz-form-item *ngIf="integrante2">
+                                    <nz-form-label [nzSpan]="6" nzRequired>Integrante 2</nz-form-label>
                                     <nz-form-control [nzSpan]="16" nzHasFeedback>
-                                        <input nz-input class="passenger-input" placeholder="Diligenciar el código del estudiante" type="text" formControlName="integrante2" />
-                                        <!--  <span nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></span>-->
+                                      <nz-select formControlName="integrante2" placeholder="Selecciona un integrante">
+                                        <nz-option *ngFor="let integrante of dataUsers" [nzValue]="integrante._id" [nzLabel]="integrante.nombre"></nz-option>
+                                      </nz-select>
                                     </nz-form-control>
-                                </nz-form-item>
-                                <nz-form-item *ngIf="integrante3">
-                                    <nz-form-label [nzSpan]="6" nzRequired>Integrante</nz-form-label>
+                                  </nz-form-item>
+                                  
+                                  <nz-form-item *ngIf="integrante3">
+                                    <nz-form-label [nzSpan]="6" nzRequired>Integrante 3</nz-form-label>
                                     <nz-form-control [nzSpan]="16" nzHasFeedback>
-                                        <input nz-input class="passenger-input" placeholder="Diligenciar el código del estudiante" type="text" formControlName="integrante3" />
-                                        <!--  <span nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></span>-->
+                                      <nz-select formControlName="integrante3" placeholder="Selecciona un integrante">
+                                        <nz-option *ngFor="let integrante of dataUsers" [nzValue]="integrante._id" [nzLabel]="integrante.nombre"></nz-option>
+                                      </nz-select>
                                     </nz-form-control>
-                                </nz-form-item>
+                                  </nz-form-item>
                                 <!-- Linea de investigación -->
                                 <nz-form-item>
                                     <nz-form-label [nzSpan]="6" nzRequired>Linea de investigación</nz-form-label>

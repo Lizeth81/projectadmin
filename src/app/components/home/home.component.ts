@@ -3,6 +3,7 @@ import { CalendarService } from 'src/app/services/calendar.service';
 import { ProcesoService } from 'src/app/services/proceso.service';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import {
   FormControl,
   FormGroup,
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
   visibleAgg = false;
   visibleHistorial = false;
   datosCalendario:any[] = [];
+  calendarioAct:any[] = [];
   datosProcesos:any[] = [];
   years: any[]= [];
   periodo= ['A', 'B'];
@@ -99,6 +101,7 @@ export class HomeComponent implements OnInit {
     public userService: UsersService,
     private fb: NonNullableFormBuilder,
     private router: Router,
+    private msg: NzMessageService,
     private modal: NzModalService){
     //El año del calendario agendar 
       const year = new Date().getFullYear();
@@ -115,8 +118,9 @@ export class HomeComponent implements OnInit {
   //Metodos
   ngOnInit(): void {
     this.ObtenerDatosCalendario();
-     this.mostrarDatosUsuario(); 
-     this.addField();
+    this.mostrarDatosUsuario(); 
+    this.addField();
+    this.calendarioActivo();
      
    }
 
@@ -125,6 +129,14 @@ export class HomeComponent implements OnInit {
     // No se pueden seleccionar fechas anteriores al día actual
     return current < new Date();
   };
+
+  calendarioActivo(){
+
+    this.calendarService.getCalendarActivo().subscribe((data) => {
+      console.log("Se encontró el calendario activo...",data[0].proceso)
+      this.calendarioAct = data[0].proceso;
+    });
+  }
   
    //Se extrae los datos del usuario para obtener el rol y poder validar el crud del calendario
    mostrarDatosUsuario(){
@@ -148,6 +160,7 @@ export class HomeComponent implements OnInit {
 }    
   openActualizar(): void {
    this.visibleActualizar = true;
+   this.calendarioActivo();
   }
   openAgg(): void {
    this.visibleAgg = true;
@@ -158,6 +171,27 @@ export class HomeComponent implements OnInit {
     this.procesoService.getProcesos().subscribe(data => {
       this.procesos= data;
      });
+  }
+
+  activarCalendario(id: string) : void {
+
+    console.log("Activar calendario: ",this.datosCalendario)
+      this.datosCalendario.forEach((element: any) => {
+        let data;
+        if(element._id === id){
+          data={
+            estado: true
+          }
+        }else{
+          data={
+            estado: false
+          }
+        }
+        console.log("se envia...",element._id, ":", data)
+        this.calendarService.putCalendario(element._id , data).subscribe();
+      });
+      this.msg.success('Calendario actualizado con éxito');
+
   }
   openHistorial(): void {
    this.visibleHistorial = true;

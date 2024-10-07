@@ -12,11 +12,7 @@
         </div>
         <div style="position:relative;">
             <!--Año y periodo del calendario-->
-            <div class="text-left">
-                <h3 style="color: red; font-weight: bold; font-family:New Roman" *ngFor="let data of datosCalendario">
-                    {{data.periodo}} || Año {{data.year}}
-                </h3>
-            </div>
+           
             <!--Botonoes del admin (historial, agregar, modificar)-->
             <div style="float: right;">
                 <div style="float: right;">
@@ -48,22 +44,17 @@
                     <th>Fecha de entrega del estudiante</th>
                     <th>Fecha de sesión de comité</th>
                     <th>Fecha de entrega de resultado</th>
-                    <th nzWidth="15%">Acciones</th>
+                   
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let item of calendarioAct">
                     <ng-container>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a><span nz-icon nzType="edit " class="icons "></span></a>
-                            <a nz-popconfirm nzPopconfirmTitle="¿Está seguro de que desea eliminar? " nzDanger>
-                                <span nz-icon nzType="delete " style="color: red; " class="icons "></span>
-                            </a>
-                        </td>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{ item.fechaEntrega | date:'longDate' }}</td>
+                        <td>{{ item.fechaSesioncomite | date:'longDate' }}</td>
+                        <td>{{ item.fechaResultado | date:'longDate' }}</td>
+                        
                     </ng-container>
                 </tr>
             </tbody>
@@ -111,7 +102,7 @@
                             </nz-table>
                         </td>
                         <td>
-                            <a  (click)="obtenerProcesos()"> Activar</a>
+                            <a  (click)="activarCalendario(item._id)"> Activar</a>
                         </td>
                     </tr>
                 </tbody>

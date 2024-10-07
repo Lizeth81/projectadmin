@@ -33,6 +33,7 @@ export class ProposedGradeAdminComponent {
   estado:string = '';
   proceso:string = '';
   idproject: string = '';
+  nameProject: string = '';
 
   ngOnInit(): void {
    this.llenardatos();
@@ -77,6 +78,7 @@ export class ProposedGradeAdminComponent {
     this.projectService.datoProyecto(id).subscribe( data => {
       this.projectId = data;
       this.demoValue = data.nota;
+      this.comentario = data.comentario;
     })
     this.isVisible = true;
   }
@@ -86,7 +88,7 @@ export class ProposedGradeAdminComponent {
     if(this.demoValue >= 3.5 ){
       this.estado = 'Aprobado'
       console.log("estado", this.estado);
-    }if(this.demoValue <= 3.4  ){
+    }if(this.demoValue <= 3.4  && this.demoValue >= 3.0){
       this.estado = 'Aplazada'
       console.log("estado", this.estado);
     }else if(this.demoValue <= 3.0 ){
@@ -151,6 +153,10 @@ export class ProposedGradeAdminComponent {
 
   downloadFile(id: string): void {
     window.open(`http://localhost:3500/api/descargarArchivo/${id}`, '_blank');
+  }
+
+  previewFile(id: string): void {
+    window.open(`http://localhost:3500/api/verArchivo/${id}`, '_blank');
   }
   
   

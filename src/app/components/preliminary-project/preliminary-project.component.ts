@@ -4,6 +4,8 @@ import { filter } from 'rxjs/operators';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { ProyectoService } from 'src/app/services/proyecto.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-preliminary-project',
@@ -15,6 +17,11 @@ export class PreliminaryProjectComponent {
   TablaEstado= false;
   switchValue = false;
   DivSwitch = true;
+  idproject:string='';
+  estadoProyecto: string='';
+  proceso: string='';
+  private fileTmp:any;
+  datoProyecto: any = {};
     //Paneles
     panels1 = [
       {
@@ -43,13 +50,46 @@ export class PreliminaryProjectComponent {
     uploading = false;
     fileList: NzUploadFile[] = [];
   
-    constructor(private http: HttpClient, private msg: NzMessageService) {}
+    constructor(private http: HttpClient, 
+      private msg: NzMessageService,
+      private proyectoService: ProyectoService,
+      private userServis: UsersService,
+
+    ) {}
+
+
+    
+  ngOnInit(): void {
   
-    ///Subir archivo Director y/o cordinador
-    AntesCargarDirector = (file: NzUploadFile): boolean => {
-      this.fileList = this.fileList.concat(file);
-      return false;
-    };
+     const dato = this.proyectoService.procAnteproyecto;
+
+     console.log("dato", dato);
+     if(dato){
+       this.proceso = this.proyectoService.getAnteproyecto();
+       this.idproject=this.proyectoService.getIdAnteproyecto();
+       this.estadoProyecto = this.proyectoService.getEstadoAnteproyecto();
+     }
+    
+     console.log("idproject", this.idproject);
+    if(this.proceso == 'Anteproyecto' && (this.estadoProyecto == 'Pendiente' || this.estadoProyecto == 'Aprobado')){
+     this.SolicitudPropuesta=false;
+     this.TablaEstado = true;
+     this.switchValue = false;
+     this.DivSwitch = false;
+     this.proyectoService.datoProyecto(this.idproject).subscribe(data=>{
+       this.datoProyecto = data;
+ 
+     }); 
+    } 
+
+  }
+
+    getfile($event: any):void{
+      const [ file ] = $event.target.files;
+        this.fileTmp = {
+          fileRaw:file
+        }
+      }
   
     SubirArchivoDirector(): void {
       const formData = new FormData();
@@ -89,13 +129,50 @@ export class PreliminaryProjectComponent {
         this.msg.error(`${info.file.name} file upload failed.`);
       }
     }
+    
+
+    ///Subir archivo Director y/o cordinador
+    AntesCargarDirector = (file: NzUploadFile): boolean => {
+      this.fileList = this.fileList.concat(file);
+      return false;
+    };
 
     GuardarTrabajo(){
-      this.msg.success('Datos cargados con exito');
-      this.SolicitudPropuesta=false;
-      this.TablaEstado = true;
-      this.switchValue = false;
-      this.DivSwitch = false;
+
+      this.proyectoService.datoProyecto(this.proyectoService.getIdProyecto()).subscribe(data => {
+        console.log("Se obtiene el siguiente proyecto: ", data)
+        const formData = new FormData();
+        formData.append('nombreDocumento', this.fileTmp.fileRaw);
+        formData.append('titulo', data.titulo);  
+      formData.append('fecha', new Date().toISOString());
+      formData.append('proceso', 'Anteproyecto');
+      formData.append('estadoProceso', 'Pendiente');
+      console.log("estudiantes asociados ...", data.estudiante);
+      let students: string[] = []; // Inicializa como un array
+
+      data.estudiante.forEach((est: any) => {
+        console.log("Se tiene el objeto", est)
+        students.push(est._id); // Agrega cada estudiante al array
+      });
+
+      // Conviertes el array a una cadena separada por comas
+      let studentsString = students.join(',');
+      formData.append('estudiante', studentsString);
+      this.proyectoService.guardarProyecto(formData).subscribe( data => {
+          this.msg.success('Datos cargados con exito');
+          console.log("Datos guardados...",data.data);
+          this.proyectoService.agregarProcAnteproyecto(true);
+          this.proyectoService.setIdAnteproyecto(data.data._id);
+          this.proyectoService.setAnteproyecto(data.data.proceso);
+          this.proyectoService.setEstadoAnteproyecto('Pendiente');
+          this.SolicitudPropuesta = false;
+          this.TablaEstado = true;
+          this.switchValue = false;
+          this.DivSwitch = false;
+          this.datoProyecto = data.data;
+      }); 
+      })
+      
     }
   ///////////////////////////////////////////////////////////////
   project = {

@@ -50,8 +50,11 @@ export class ProposedgradeComponent implements OnInit {
   integrante3:boolean= false;
   botonIngresarIntegrante:boolean = true;
   dataprueba: any[] = [];
+  dataUsers: any[] = [];
   datoProyecto: any = {};
   idproject:string='';
+  estadoProyecto: string='';
+
   private fileTmp:any;
   private dataProject:any;
 
@@ -92,17 +95,23 @@ export class ProposedgradeComponent implements OnInit {
     if(dato){
       this.proceso = this.proyectoService.getProceso();
       this.idproject=this.proyectoService.getIdProyecto();
+      this.estadoProyecto = this.proyectoService.getEstadoPropuesta();
     }
    
     console.log("idproject", this.idproject);
-   if(this.proceso == 'Propuesta de grado'){
+   if(this.proceso == 'Propuesta de grado' && (this.estadoProyecto == 'Pendiente' || this.estadoProyecto == 'Aprobado')){
     this.SolicitudPropuesta=false;
     this.TablaEstado = true;
     this.proyectoService.datoProyecto(this.idproject).subscribe(data=>{
       this.datoProyecto = data;
     }); 
    } 
+
+   this.userServis.getUsers().subscribe(data =>{
+      this.dataUsers = data;
+  });
   }
+
     //------------------Cargar proyecto------------------------------
      //captcha Icono de información sobre herramientas( solo puede agg 3 integrantes)
      AgregarIntegrante(e?: MouseEvent): void {
@@ -138,7 +147,11 @@ export class ProposedgradeComponent implements OnInit {
         lineaInvestigacion: this.validateForm.value.lineaInvestigacion,
         semilleroInvestigacion: this.validateForm.value.semilleroInvestigacion,
         estadoProceso: 'Pendiente',
-        estudiante: this.idUserIntegrante1       
+        estudiante: [
+          this.validateForm.value.integrante1,
+          this.validateForm.value.integrante2,
+          this.validateForm.value.integrante3
+        ].filter(integrante => integrante) // Filtra los valores vacíos 
       };   
       const formData = new FormData();
       formData.append('nombreDocumento', this.fileTmp.fileRaw);
@@ -146,19 +159,18 @@ export class ProposedgradeComponent implements OnInit {
       formData.append('fecha', this.dataProject.fecha);
       formData.append('proceso', this.dataProject.proceso);
       formData.append('estadoProceso', this.dataProject.estadoProceso);
+      console.log("estudiantes asociados ...", this.dataProject.estudiante);
+      formData.append('estudiante', this.dataProject.estudiante)
       this.proyectoService.guardarProyecto(formData).subscribe( data => {
-        const idProyecto = data.data._id;
-        const idStuden = this.idUserIntegrante1;
-       if(data.success){
-        this.proyectoService.actualizarProyecto(idProyecto, idStuden).subscribe(msj =>{
-          console.log(msj);
-        });
           this.msg.success('Datos cargados con exito');
-          this.SolicitudPropuesta=false;
+          console.log("Datos guardados...",data.data);
+          this.proyectoService.agregarProcPropuestaGrado(true);
+          this.proyectoService.setIdProyecto(data.data._id);
+          this.proyectoService.setProceso(data.data.proceso);
+          this.proyectoService.setEstadoPropuesta('Pendiente');
+          this.SolicitudPropuesta = false;
+          this.datoProyecto = data.data;
           this.TablaEstado = true;
-        } else{
-          this.msg.error(data.msj);
-        } 
       }); 
     }
 

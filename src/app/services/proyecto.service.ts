@@ -9,6 +9,11 @@ import { CookieService } from "ngx-cookie-service";
 export class ProyectoService {
 
   private procesoPropuestaGrado = false;
+  private procesoSustentacion = false;
+  private procesoAnteproyecto = false;
+  private procesoTrabajoFinal = false;
+
+
   url:string = "http://localhost:3500/api";
 
   constructor(private http: HttpClient, private cookies: CookieService) { }
@@ -19,6 +24,28 @@ export class ProyectoService {
   agregarProcPropuestaGrado(dato: boolean){
     this.procesoPropuestaGrado = dato;
   }
+
+  get procSustentacion(){
+    return this.procesoSustentacion;
+}
+agregarProcSustentacion(dato: boolean){
+  this.procesoSustentacion = dato;
+}
+
+get procAnteproyecto(){
+  return this.procesoAnteproyecto;
+}
+agregarProcAnteproyecto(dato: boolean){
+this.procesoAnteproyecto = dato;
+}
+
+get procTrabajoFinal(){
+  return this.procesoTrabajoFinal;
+}
+agregarProcTrabajoFinal(dato: boolean){
+this.procesoTrabajoFinal = dato;
+}
+
   //-------------Proyecto----------------
 
   //Obtener los datos del proyecto
@@ -85,6 +112,80 @@ getIdProyecto(){
   }
   getProceso(){ 
     return JSON.parse(localStorage.getItem('Proceso') || '');
+  }
+ 
+  setEstadoPropuesta(proceso: any){
+    localStorage.setItem('estadoPropuesta', JSON.stringify(proceso));
+  }
+  getEstadoPropuesta(){ 
+    return JSON.parse(localStorage.getItem('estadoPropuesta') || '');
+  }
+
+
+  //----------------guarda el id del sustentacion--------------
+setIdSustentacion(idProyecto: any){
+  localStorage.setItem('idSustentacion', JSON.stringify(idProyecto));
+}
+getIdSustentacion(){ 
+  return JSON.parse(localStorage.getItem('idSustentacion') || '');
+}
+//----------------Guarda el proceso de la sustentacion---------------
+  setSustentacion(proceso: any){
+    localStorage.setItem('Sustentacion', JSON.stringify(proceso));
+  }
+  getSustentacion(){ 
+    return JSON.parse(localStorage.getItem('Sustentacion') || '');
+  }
+ 
+  setEstadoSustentacion(proceso: any){
+    localStorage.setItem('estadoSustentacion', JSON.stringify(proceso));
+  }
+  getEstadoSustentacion(){ 
+    return JSON.parse(localStorage.getItem('estadoSustentacion') || '');
+  }
+
+   //----------------guarda el id del anteproyecto--------------
+setIdAnteproyecto(idProyecto: any){
+  localStorage.setItem('idAnteproyecto', JSON.stringify(idProyecto));
+}
+getIdAnteproyecto(){ 
+  return JSON.parse(localStorage.getItem('idAnteproyecto') || '');
+}
+//----------------Guarda el proceso de la sustentacion---------------
+  setAnteproyecto(proceso: any){
+    localStorage.setItem('Anteproyecto', JSON.stringify(proceso));
+  }
+  getAnteproyecto(){ 
+    return JSON.parse(localStorage.getItem('Anteproyecto') || '');
+  }
+ 
+  setEstadoAnteproyecto(proceso: any){
+    localStorage.setItem('estadoAnteproyecto', JSON.stringify(proceso));
+  }
+  getEstadoAnteproyecto(){ 
+    return JSON.parse(localStorage.getItem('estadoAnteproyecto') || '');
+  }
+
+   //----------------guarda el id del anteproyecto--------------
+setIdProyectoFinal(idProyecto: any){
+  localStorage.setItem('idProyectoFinal', JSON.stringify(idProyecto));
+}
+getIdProyectoFinal(){ 
+  return JSON.parse(localStorage.getItem('idProyectoFinal') || '');
+}
+//----------------Guarda el proceso de la sustentacion---------------
+  setProyectoFinal(proceso: any){
+    localStorage.setItem('ProyectoFinal', JSON.stringify(proceso));
+  }
+  getProyectoFinal(){ 
+    return JSON.parse(localStorage.getItem('ProyectoFinal') || '');
+  }
+ 
+  setEstadoProyectoFinal(proceso: any){
+    localStorage.setItem('estadoProyectoFinal', JSON.stringify(proceso));
+  }
+  getEstadoProyectoFinal(){ 
+    return JSON.parse(localStorage.getItem('estadoProyectoFinal') || '');
   }
 
 

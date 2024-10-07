@@ -4,6 +4,8 @@ import { filter } from 'rxjs/operators';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { ProyectoService } from 'src/app/services/proyecto.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-final-work',
@@ -13,6 +15,12 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 export class FinalWorkComponent {
   SolicitudPropuesta =true;
   switchValue = false;
+  TablaEstado= false;
+  idproject:string='';
+  estadoProyecto: string='';
+  proceso: string='';
+  private fileTmp:any;
+  datoProyecto: any = {};
     //Paneles
     panels1 = [
       {
@@ -41,7 +49,42 @@ export class FinalWorkComponent {
     uploading = false;
     fileList: NzUploadFile[] = [];
   
-    constructor(private http: HttpClient, private msg: NzMessageService) {}
+    constructor(private http: HttpClient, 
+      private msg: NzMessageService,
+      private proyectoService: ProyectoService,
+      private userServis: UsersService,
+    ) {}
+
+    ngOnInit(): void {
+  
+      const dato = this.proyectoService.procTrabajoFinal;
+ 
+      console.log("dato", dato);
+      if(dato){
+        this.proceso = this.proyectoService.getProyectoFinal();
+        this.idproject=this.proyectoService.getIdProyectoFinal();
+        this.estadoProyecto = this.proyectoService.getEstadoProyectoFinal();
+      }
+     
+      console.log("idproject", this.idproject);
+     if(this.proceso == 'TrabajoFinal' && (this.estadoProyecto == 'Pendiente' || this.estadoProyecto == 'Aprobado')){
+      this.SolicitudPropuesta=false;
+      this.TablaEstado = true;
+      this.switchValue = false;
+      this.proyectoService.datoProyecto(this.idproject).subscribe(data=>{
+        this.datoProyecto = data;
+  
+      }); 
+     } 
+ 
+   }
+ 
+     getfile($event: any):void{
+       const [ file ] = $event.target.files;
+         this.fileTmp = {
+           fileRaw:file
+         }
+       }
   
     ///Subir archivo Director y/o cordinador
     AntesCargarDirector = (file: NzUploadFile): boolean => {
@@ -89,8 +132,40 @@ export class FinalWorkComponent {
     }
 
     GuardarTrabajo(){
-      this.msg.success('Datos cargados con exito');
-      this.switchValue = false;
+
+      this.proyectoService.datoProyecto(this.proyectoService.getIdProyecto()).subscribe(data => {
+        console.log("Se obtiene el siguiente proyecto: ", data)
+        const formData = new FormData();
+        formData.append('nombreDocumento', this.fileTmp.fileRaw);
+        formData.append('titulo', data.titulo);  
+      formData.append('fecha', new Date().toISOString());
+      formData.append('proceso', 'TrabajoFinal');
+      formData.append('estadoProceso', 'Pendiente');
+      console.log("estudiantes asociados ...", data.estudiante);
+      let students: string[] = []; // Inicializa como un array
+
+      data.estudiante.forEach((est: any) => {
+        console.log("Se tiene el objeto", est)
+        students.push(est._id); // Agrega cada estudiante al array
+      });
+
+      // Conviertes el array a una cadena separada por comas
+      let studentsString = students.join(',');
+      formData.append('estudiante', studentsString);
+      this.proyectoService.guardarProyecto(formData).subscribe( data => {
+          this.msg.success('Datos cargados con exito');
+          console.log("Datos guardados...",data.data);
+          this.proyectoService.agregarProcTrabajoFinal(true);
+          this.proyectoService.setIdProyectoFinal(data.data._id);
+          this.proyectoService.setProyectoFinal(data.data.proceso);
+          this.proyectoService.setEstadoProyectoFinal('Pendiente');
+          this.SolicitudPropuesta = false;
+          this.TablaEstado = true;
+          this.switchValue = false;
+          this.datoProyecto = data.data;
+      }); 
+      })
+      
     }
   ///////////////////////////////////////////////////////////////
   project = {

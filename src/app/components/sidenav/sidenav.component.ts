@@ -18,6 +18,7 @@ export class SidenavComponent implements OnInit {
   idUserProject: String = '';
   procesoTrabajo: String = '';
   idProject: String = '';
+  estadoProyecto: String = '';
   propuestaGrado:boolean=false;
   anteproyecto:boolean=false;
   trabajoFinal:boolean=false;
@@ -53,6 +54,7 @@ getUserLogged() {
     this.userService.getNombreRolUsuario(data.rol).subscribe((dataRol) => { 
       console.log("Rol", dataRol);
       if(dataRol== 'Estudiante'){
+        this.propuestaGrado=true; 
         this.notaFinal=true;
         this.proyecService.proyectos().subscribe(data => {
           for (let index = 0; index < data.length; index++) {
@@ -62,24 +64,44 @@ getUserLogged() {
               this.idUserProject = this.usersEstudiante[i]._id;      
               if(this.idUser ==  this.idUserProject){
                 console.log("tiene proyecto");
-                this.proyecService.agregarProcPropuestaGrado(this.dato);
-                this.procesoTrabajo = element.proceso;   
-                this.idProject = element._id;   
-                this.proyecService.setIdProyecto(this.idProject);
-                this.proyecService.setProceso(this.procesoTrabajo);                
+                
+                this.procesoTrabajo = element.proceso;  
+                this.estadoProyecto = element.estadoProceso;
+                this.idProject = element._id;  
+                if(this.procesoTrabajo == "Propuesta de grado" && this.estadoProyecto == "Aprobado"){
+                  this.anteproyecto=true;
+                } 
+                /**else if(this.procesoTrabajo == "Sustentacion" && this.estadoProyecto == "Aprobado"){
+                  this.anteproyecto=true;
+                }**/
+               if(this.procesoTrabajo == "Anteproyecto" && this.estadoProyecto == "Aprobado"){
+                  this.trabajoFinal = true;
+                }
+                  this.propuestaGrado=true; 
+
+                if(this.procesoTrabajo == "Propuesta de grado" && this.estadoProyecto != "Rechazada"){
+                  this.proyecService.agregarProcPropuestaGrado(this.dato);
+                  this.proyecService.setIdProyecto(this.idProject);
+                  this.proyecService.setProceso(this.procesoTrabajo);
+                  this.proyecService.setEstadoPropuesta(this.estadoProyecto);
+                }
+                if(this.procesoTrabajo == "Anteproyecto" && this.estadoProyecto != "Rechazada"){
+                  this.proyecService.agregarProcAnteproyecto(this.dato);
+                  this.proyecService.setIdAnteproyecto(this.idProject);
+                  this.proyecService.setAnteproyecto(this.procesoTrabajo);
+                  this.proyecService.setEstadoAnteproyecto(this.estadoProyecto);
+                }
+                if(this.procesoTrabajo == "TrabajoFinal" && this.estadoProyecto != "Rechazada"){
+                  this.proyecService.agregarProcTrabajoFinal(this.dato);
+                  this.proyecService.setIdProyectoFinal(this.idProject);
+                  this.proyecService.setProyectoFinal(this.procesoTrabajo);
+                  this.proyecService.setEstadoProyectoFinal(this.estadoProyecto);
+                }
+                              
               }    
             }        
           }
-          if(this.procesoTrabajo == "Sustentacion"){
-            this.sustentacion=true;
-          }else if(this.procesoTrabajo == "Anteproyecto"){
-            this.anteproyecto=true;
-          }else if(this.procesoTrabajo == "Trabajofinal"){
-            this.trabajoFinal = true;
-          }else{
-            console.log("no tiene ningun proyecto asignado"); 
-            this.propuestaGrado=true;
-          }  
+         
         });         
         } else if(dataRol == 'Administrador'){
           this.MenuAdmin=true;
@@ -117,6 +139,7 @@ handleCancel(): void {
 }
 ngOnInit(): void {
   this.getUserLogged();
+  
 }
 
 showModal() {

@@ -24,9 +24,10 @@ export class LoginComponent implements OnInit {
       const dataUser = {correo: this.validateForm.value.correo, pass: this.validateForm.value.pass};
       this.userService.Login(dataUser).subscribe(data => {        
          if(data.success){          
-          console.log("data:",data);                  
+          console.log("data:",data);   
+          console.log("data id", data._id);   
           this.userService.setToken(data.token);
-          this.userService.setUserLogged(data._id);
+          this.userService.setUserLogged(data._id?data._id:"");
           this.modal.success({
             nzContent: '¡Bienvenido al sistema de administración de proyecto de grado!'
             });
